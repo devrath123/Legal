@@ -66,7 +66,7 @@ public class CaseDetailsActivity extends AppCompatActivity {
         judge_tv.setText(caseBean.getJudge_name());
         case_number_tv.setText(caseBean.getCase_number());
         parties_name_tv.setText(caseBean.getParty_a() + " vs " + caseBean.getParty_b());
-        next_date_tv.setText(caseBean.getNext_date());
+        next_date_tv.setText(caseBean.getDisplay_next_date());
         stage_tv.setText(caseBean.getStage());
         client_tv.setText(caseBean.getClient_name());
         client_phone_tv.setText(caseBean.getClient_phone());

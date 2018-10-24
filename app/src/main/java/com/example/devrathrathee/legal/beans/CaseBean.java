@@ -36,11 +36,17 @@ public class CaseBean {
     }
 
     public static class CasesToday implements Parcelable{
-        String case_id,next_date,court_name,court_number,case_number,judge_name,party_a,party_b,stage,client_name,category,firm_name,client_phone;
+        String case_id,display_prev_date,display_next_date,court_name,court_number,case_number,judge_name,party_a,party_b,
+                stage,client_name,category,firm_name,client_phone;
+        List<PrevCaseDate> prev_case_date;
+        List<NextId> nextdt_id;
+        List<NextUpdateDate> next_update_date;
+        List<NextStage> next_stage;
 
         protected CasesToday(Parcel in) {
             case_id = in.readString();
-            next_date = in.readString();
+            display_prev_date = in.readString();
+            display_next_date = in.readString();
             court_name = in.readString();
             court_number = in.readString();
             case_number = in.readString();
@@ -52,6 +58,37 @@ public class CaseBean {
             category = in.readString();
             firm_name = in.readString();
             client_phone = in.readString();
+            prev_case_date = in.createTypedArrayList(PrevCaseDate.CREATOR);
+            nextdt_id = in.createTypedArrayList(NextId.CREATOR);
+            next_update_date = in.createTypedArrayList(NextUpdateDate.CREATOR);
+            next_stage = in.createTypedArrayList(NextStage.CREATOR);
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(case_id);
+            dest.writeString(display_prev_date);
+            dest.writeString(display_next_date);
+            dest.writeString(court_name);
+            dest.writeString(court_number);
+            dest.writeString(case_number);
+            dest.writeString(judge_name);
+            dest.writeString(party_a);
+            dest.writeString(party_b);
+            dest.writeString(stage);
+            dest.writeString(client_name);
+            dest.writeString(category);
+            dest.writeString(firm_name);
+            dest.writeString(client_phone);
+            dest.writeTypedList(prev_case_date);
+            dest.writeTypedList(nextdt_id);
+            dest.writeTypedList(next_update_date);
+            dest.writeTypedList(next_stage);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
         }
 
         public static final Creator<CasesToday> CREATOR = new Creator<CasesToday>() {
@@ -74,12 +111,20 @@ public class CaseBean {
             this.case_id = case_id;
         }
 
-        public String getNext_date() {
-            return next_date;
+        public String getDisplay_prev_date() {
+            return display_prev_date;
         }
 
-        public void setNext_date(String next_date) {
-            this.next_date = next_date;
+        public void setDisplay_prev_date(String display_prev_date) {
+            this.display_prev_date = display_prev_date;
+        }
+
+        public String getDisplay_next_date() {
+            return display_next_date;
+        }
+
+        public void setDisplay_next_date(String display_next_date) {
+            this.display_next_date = display_next_date;
         }
 
         public String getCourt_name() {
@@ -170,27 +215,190 @@ public class CaseBean {
             this.client_phone = client_phone;
         }
 
-        @Override
-        public int describeContents() {
-            return 0;
+        public List<PrevCaseDate> getPrev_case_date() {
+            return prev_case_date;
         }
 
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(case_id);
-            dest.writeString(next_date);
-            dest.writeString(court_name);
-            dest.writeString(court_number);
-            dest.writeString(case_number);
-            dest.writeString(judge_name);
-            dest.writeString(party_a);
-            dest.writeString(party_b);
-            dest.writeString(stage);
-            dest.writeString(client_name);
-            dest.writeString(category);
-            dest.writeString(firm_name);
-            dest.writeString(client_phone);
+        public void setPrev_case_date(List<PrevCaseDate> prev_case_date) {
+            this.prev_case_date = prev_case_date;
         }
+
+        public List<NextId> getNextdt_id() {
+            return nextdt_id;
+        }
+
+        public void setNextdt_id(List<NextId> nextdt_id) {
+            this.nextdt_id = nextdt_id;
+        }
+
+        public List<NextUpdateDate> getNext_update_date() {
+            return next_update_date;
+        }
+
+        public void setNext_update_date(List<NextUpdateDate> next_update_date) {
+            this.next_update_date = next_update_date;
+        }
+
+        public List<NextStage> getNext_stage() {
+            return next_stage;
+        }
+
+        public void setNext_stage(List<NextStage> next_stage) {
+            this.next_stage = next_stage;
+        }
+
+        public static class PrevCaseDate implements Parcelable{
+            String prev_date;
+
+            protected PrevCaseDate(Parcel in) {
+                prev_date = in.readString();
+            }
+
+            public static final Creator<PrevCaseDate> CREATOR = new Creator<PrevCaseDate>() {
+                @Override
+                public PrevCaseDate createFromParcel(Parcel in) {
+                    return new PrevCaseDate(in);
+                }
+
+                @Override
+                public PrevCaseDate[] newArray(int size) {
+                    return new PrevCaseDate[size];
+                }
+            };
+
+            public String getPrev_date() {
+                return prev_date;
+            }
+
+            public void setPrev_date(String prev_date) {
+                this.prev_date = prev_date;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel parcel, int i) {
+                parcel.writeString(prev_date);
+            }
+        }
+
+        public static class NextId implements Parcelable{
+            String next_id;
+
+            protected NextId(Parcel in) {
+                next_id = in.readString();
+            }
+
+            public static final Creator<NextId> CREATOR = new Creator<NextId>() {
+                @Override
+                public NextId createFromParcel(Parcel in) {
+                    return new NextId(in);
+                }
+
+                @Override
+                public NextId[] newArray(int size) {
+                    return new NextId[size];
+                }
+            };
+
+            public String getNext_id() {
+                return next_id;
+            }
+
+            public void setNext_id(String next_id) {
+                this.next_id = next_id;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel parcel, int i) {
+                parcel.writeString(next_id);
+            }
+        }
+
+        public static class NextUpdateDate implements Parcelable{
+            String next_date;
+
+            protected NextUpdateDate(Parcel in) {
+                next_date = in.readString();
+            }
+
+            public static final Creator<NextUpdateDate> CREATOR = new Creator<NextUpdateDate>() {
+                @Override
+                public NextUpdateDate createFromParcel(Parcel in) {
+                    return new NextUpdateDate(in);
+                }
+
+                @Override
+                public NextUpdateDate[] newArray(int size) {
+                    return new NextUpdateDate[size];
+                }
+            };
+
+            public String getNext_date() {
+                return next_date;
+            }
+
+            public void setNext_date(String next_date) {
+                this.next_date = next_date;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel parcel, int i) {
+                parcel.writeString(next_date);
+            }
+        }
+
+        public static class NextStage implements Parcelable{
+            String stages;
+
+            protected NextStage(Parcel in) {
+                stages = in.readString();
+            }
+
+            public static final Creator<NextStage> CREATOR = new Creator<NextStage>() {
+                @Override
+                public NextStage createFromParcel(Parcel in) {
+                    return new NextStage(in);
+                }
+
+                @Override
+                public NextStage[] newArray(int size) {
+                    return new NextStage[size];
+                }
+            };
+
+            public String getStages() {
+                return stages;
+            }
+
+            public void setStages(String stages) {
+                this.stages = stages;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel parcel, int i) {
+                parcel.writeString(stages);
+            }
+        }
+
     }
 
 }

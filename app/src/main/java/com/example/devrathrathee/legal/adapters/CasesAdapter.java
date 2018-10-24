@@ -42,7 +42,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.TodayCasesVi
     public void onBindViewHolder(@NonNull final TodayCasesViewHolder todayCasesViewHolder, int i) {
 
         CaseBean.CasesToday casesTodayBean = casesTodayBeanList.get(i);
-        todayCasesViewHolder.next_date_tv.setText(casesTodayBean.getNext_date());
+        todayCasesViewHolder.next_date_tv.setText(casesTodayBean.getDisplay_next_date());
         todayCasesViewHolder.stage_tv.setText(casesTodayBean.getStage());
         todayCasesViewHolder.court_name_tv.setText(casesTodayBean.getCourt_name());
         todayCasesViewHolder.parties_name_tv.setText(casesTodayBean.getParty_a() + " vs " + casesTodayBean.getParty_b());

@@ -4,30 +4,34 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_cases"
-            android:title="Cases" />
 
         <item
             android:id="@+id/nav_upcoming_cases"
-            android:title="Upcoming Cases" />
+            android:title="Upcoming Cases " />
 
         <item
             android:id="@+id/nav_all_cases"
-            android:title="All Cases" />
+            android:title="All Cases"
+            />
 
         <item
             android:id="@+id/nav_calendar"
             android:title="Calendar" />
 
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_counsel_desk"
+            android:title="Counsel Desk" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_matter_received"
+            android:title="Matter received" />
+
+        <item
+            android:id="@+id/nav_matter_sent"
+            android:title="Matter sent" />
+
+        <item
+            android:id="@+id/nav_legal_queries"
+            android:title="Legal Queries" />
     </group>
 
 </menu>

@@ -10,4 +10,6 @@ public interface Constants {
 
    String TYPE_LAWYER = "lawyer";
    String TYPE_FIRM = "firm";
+
+   String INTENT_CASE = "Case";
 }

@@ -32,6 +32,7 @@
         <activity
             android:name=".views.HomeActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".views.CaseDetailsActivity"></activity>
     </application>
 
 </manifest>

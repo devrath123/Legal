@@ -3,35 +3,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/main_option"
+        android:checkableBehavior="single"
+        android:visible="true">
+
+        <item
+            android:id="@+id/nav_cases"
+            android:title="Cases " />
+
+        <item
+            android:id="@+id/nav_counsel_desk"
+            android:title="Counsel Desk" />
+
+        <item
+            android:id="@+id/nav_lawyer_support_desk"
+            android:title="Lawyer Support Desk" />
+
+        <item
+            android:id="@+id/nav_legal_queries"
+            android:title="Legal Queries" />
+
+        <item
+            android:id="@+id/nav_professional_fees"
+            android:title="Professional Fees" />
+
+        <item
+            android:id="@+id/nav_account_details"
+            android:title="Account Details" />
+
+        <item
+            android:id="@+id/nav_password_reset"
+            android:title="Password Reset" />
+
+        <item
+            android:id="@+id/nav_find_interns"
+            android:title="Find Interns" />
+
+        <item
+            android:id="@+id/nav_post_jobs"
+            android:title="Post Jobs" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout" />
+
+    </group>
+
+    <group
+        android:id="@+id/cases_options"
+        android:checkableBehavior="single"
+        android:visible="false"
+        >
+
+        <item
+            android:id="@+id/nav_option_cases"
+            android:icon="@drawable/arrow_left"
+            android:title="Cases" />
 
         <item
             android:id="@+id/nav_upcoming_cases"
-            android:title="Upcoming Cases " />
+            android:title="Upcoming Cases" />
 
         <item
             android:id="@+id/nav_all_cases"
-            android:title="All Cases"
-            />
+            android:title="All Cases" />
 
         <item
             android:id="@+id/nav_calendar"
             android:title="Calendar" />
 
+    </group>
+
+    <group
+        android:id="@+id/lawyer_support_options"
+        android:checkableBehavior="single"
+        android:visible="false"
+        >
+
         <item
-            android:id="@+id/nav_counsel_desk"
-            android:title="Counsel Desk" />
+            android:icon="@drawable/arrow_left"
+            android:id="@+id/nav_option_lawyer_support_desk"
+            android:title="Lawyer Support Desk" />
+
         <item
             android:id="@+id/nav_matter_received"
-            android:title="Matter received" />
+            android:title="Matter Received" />
 
         <item
             android:id="@+id/nav_matter_sent"
-            android:title="Matter sent" />
+            android:title="Matter Sent" />
 
-        <item
-            android:id="@+id/nav_legal_queries"
-            android:title="Legal Queries" />
+
     </group>
 
 </menu>

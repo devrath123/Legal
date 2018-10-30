@@ -12,4 +12,6 @@ public interface Constants {
    String TYPE_FIRM = "firm";
 
    String INTENT_CASE = "Case";
+   String INTENT_COUNSEL = "Counsel";
+   String INTENT_LEGAL_QUERY = "Legal_Query";
 }

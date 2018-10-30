@@ -28,31 +28,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Court"
+                    android:text="Counselor"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/court_name_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="Case no"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/case_number_tv"
+                    android:id="@+id/counselor_name_tv_name_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7" />
@@ -88,31 +68,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Next Date"
+                    android:text="Status"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/next_date_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="Stage"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/stage_tv"
+                    android:id="@+id/status_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7" />

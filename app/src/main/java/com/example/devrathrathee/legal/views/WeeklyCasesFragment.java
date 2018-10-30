@@ -28,7 +28,7 @@ import java.util.Map;
 public class WeeklyCasesFragment extends Fragment {
 
     RecyclerView recyclerView;
-    ProgressDialog progressDialog ;
+ //   ProgressDialog progressDialog ;
 
     public WeeklyCasesFragment() {
     }
@@ -47,8 +47,8 @@ public class WeeklyCasesFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.weekly_cases_rv);
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading...");
+     //   progressDialog = new ProgressDialog(getActivity());
+     //   progressDialog.setMessage("Loading...");
 
         getWeeklyCases();
 
@@ -61,13 +61,13 @@ public class WeeklyCasesFragment extends Fragment {
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_ID));
 
-        progressDialog.show();
+     //   progressDialog.show();
 
         GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_WEEKLY, CaseBean.class, todayCasesMap,
                 new Response.Listener<CaseBean>() {
                     @Override
                     public void onResponse(CaseBean response) {
-                        progressDialog.dismiss();
+                   //     progressDialog.dismiss();
                         if (response.getCases_weekly() != null) {
                             setAdapter(response.getCases_weekly());
                         }
@@ -75,7 +75,7 @@ public class WeeklyCasesFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+           //     progressDialog.dismiss();
             }
         });
 

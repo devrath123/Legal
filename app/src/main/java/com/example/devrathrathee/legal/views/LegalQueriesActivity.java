@@ -11,8 +11,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
-import com.example.devrathrathee.legal.adapters.CasesAdapter;
-import com.example.devrathrathee.legal.beans.CaseBean;
+import com.example.devrathrathee.legal.adapters.CounselDeskAdapter;
+import com.example.devrathrathee.legal.adapters.LegalQueryAdapter;
+import com.example.devrathrathee.legal.beans.CounselDeskBean;
+import com.example.devrathrathee.legal.beans.LegalQueryBean;
 import com.example.devrathrathee.legal.utils.API;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
@@ -23,27 +25,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.ButterKnife;
+public class LegalQueriesActivity extends AppCompatActivity {
 
-public class AllCasesActivity extends AppCompatActivity {
-
-    RecyclerView allCasesRV;
+    RecyclerView legal_queries_rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_cases);
+        setContentView(R.layout.activity_legal_queries);
 
-        allCasesRV = findViewById(R.id.all_cases_rv);
+
+        legal_queries_rv = findViewById(R.id.legal_queries_rv);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("All Cases");
+        getSupportActionBar().setTitle("Manage Queries");
 
-        getTodayCases();
+        getLegalQueries();
+
     }
 
     @Override
@@ -56,21 +58,21 @@ public class AllCasesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getTodayCases() {
+    private void getLegalQueries() {
         Map<String, String> todayCasesMap = new HashMap<>();
         todayCasesMap.put("action", "select");
-        todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_TYPE));
-        todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_ID));
+        todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(LegalQueriesActivity.this).getString(Constants.USER_TYPE));
+        todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(LegalQueriesActivity.this).getString(Constants.USER_ID));
 
         // progressDialog.show();
-        GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_ALL, CaseBean.class, todayCasesMap,
+        GSONRequest<LegalQueryBean> casesTodayBeanGSONRequest = new GSONRequest<>(Request.Method.POST, API.BASE_URL + API.LEGAL_QUERIES, LegalQueryBean.class, todayCasesMap,
 
-                new Response.Listener<CaseBean>() {
+                new Response.Listener<LegalQueryBean>() {
                     @Override
-                    public void onResponse(CaseBean response) {
-                        //   progressDialog.dismiss();
-                        if (response.getCase_all() != null) {
-                            setAdapter(response.getCase_all());
+                    public void onResponse(LegalQueryBean response) {
+
+                        if (response.getLawyer_matter_rec() != null) {
+                            setAdapter(response.getLawyer_matter_rec());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -84,10 +86,10 @@ public class AllCasesActivity extends AppCompatActivity {
         Utilities.getRequestQueue(this).add(casesTodayBeanGSONRequest);
     }
 
-    private void setAdapter(List<CaseBean.CasesToday> cases_today) {
-        CasesAdapter casesAdapter = new CasesAdapter(this, cases_today);
-        allCasesRV.setAdapter(casesAdapter);
+    private void setAdapter(List<LegalQueryBean.ManageQueryBean> cases_today) {
+        LegalQueryAdapter casesAdapter = new LegalQueryAdapter(this, cases_today);
+        legal_queries_rv.setAdapter(casesAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        allCasesRV.setLayoutManager(mLayoutManager);
+        legal_queries_rv.setLayoutManager(mLayoutManager);
     }
 }

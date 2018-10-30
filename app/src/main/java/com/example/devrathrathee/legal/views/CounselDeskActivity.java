@@ -12,7 +12,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.adapters.CasesAdapter;
+import com.example.devrathrathee.legal.adapters.CounselDeskAdapter;
 import com.example.devrathrathee.legal.beans.CaseBean;
+import com.example.devrathrathee.legal.beans.CounselDeskBean;
 import com.example.devrathrathee.legal.utils.API;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
@@ -23,27 +25,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.ButterKnife;
+public class CounselDeskActivity extends AppCompatActivity {
 
-public class AllCasesActivity extends AppCompatActivity {
-
-    RecyclerView allCasesRV;
+    RecyclerView counsel_desk_rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_cases);
+        setContentView(R.layout.activity_counsel_desk);
 
-        allCasesRV = findViewById(R.id.all_cases_rv);
+
+        counsel_desk_rv = findViewById(R.id.counsel_desk_rv);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("All Cases");
+        getSupportActionBar().setTitle("Cases Diary");
 
-        getTodayCases();
+        getCounselInfo();
+
     }
 
     @Override
@@ -56,21 +58,21 @@ public class AllCasesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getTodayCases() {
+    private void getCounselInfo() {
         Map<String, String> todayCasesMap = new HashMap<>();
         todayCasesMap.put("action", "select");
-        todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_TYPE));
-        todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_ID));
+        todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(CounselDeskActivity.this).getString(Constants.USER_TYPE));
+        todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(CounselDeskActivity.this).getString(Constants.USER_ID));
 
         // progressDialog.show();
-        GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_ALL, CaseBean.class, todayCasesMap,
+        GSONRequest<CounselDeskBean> casesTodayBeanGSONRequest = new GSONRequest<>(Request.Method.POST, API.BASE_URL + API.COUNSEL_DESK, CounselDeskBean.class, todayCasesMap,
 
-                new Response.Listener<CaseBean>() {
+                new Response.Listener<CounselDeskBean>() {
                     @Override
-                    public void onResponse(CaseBean response) {
-                        //   progressDialog.dismiss();
-                        if (response.getCase_all() != null) {
-                            setAdapter(response.getCase_all());
+                    public void onResponse(CounselDeskBean response) {
+
+                        if (response.getLawyer_counselor() != null) {
+                            setAdapter(response.getLawyer_counselor());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -84,10 +86,10 @@ public class AllCasesActivity extends AppCompatActivity {
         Utilities.getRequestQueue(this).add(casesTodayBeanGSONRequest);
     }
 
-    private void setAdapter(List<CaseBean.CasesToday> cases_today) {
-        CasesAdapter casesAdapter = new CasesAdapter(this, cases_today);
-        allCasesRV.setAdapter(casesAdapter);
+    private void setAdapter(List<CounselDeskBean.CounselBean> cases_today) {
+        CounselDeskAdapter casesAdapter = new CounselDeskAdapter(this, cases_today);
+        counsel_desk_rv.setAdapter(casesAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        allCasesRV.setLayoutManager(mLayoutManager);
+        counsel_desk_rv.setLayoutManager(mLayoutManager);
     }
 }

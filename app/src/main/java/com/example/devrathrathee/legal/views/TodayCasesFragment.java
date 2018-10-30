@@ -28,7 +28,7 @@ import java.util.Map;
 public class TodayCasesFragment extends Fragment {
 
 
-    ProgressDialog progressDialog;
+   // ProgressDialog progressDialog;
     RecyclerView todayCasesRV;
 
     public TodayCasesFragment() {
@@ -48,8 +48,8 @@ public class TodayCasesFragment extends Fragment {
 
         todayCasesRV = view.findViewById(R.id.today_cases_rv);
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading...");
+      //  progressDialog = new ProgressDialog(getActivity());
+      //  progressDialog.setMessage("Loading...");
 
         getTodayCases();
         return view;
@@ -61,12 +61,12 @@ public class TodayCasesFragment extends Fragment {
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_ID));
 
-        progressDialog.show();
+       // progressDialog.show();
         GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_TODAY, CaseBean.class, todayCasesMap,
                 new Response.Listener<CaseBean>() {
                     @Override
                     public void onResponse(CaseBean response) {
-                        progressDialog.dismiss();
+                     //   progressDialog.dismiss();
                         if (response.getCases_today() != null) {
                             setAdapter(response.getCases_today());
                         }
@@ -74,7 +74,7 @@ public class TodayCasesFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+             //   progressDialog.dismiss();
             }
         });
 

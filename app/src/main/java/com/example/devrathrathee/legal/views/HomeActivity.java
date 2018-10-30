@@ -1,5 +1,6 @@
 package com.example.devrathrathee.legal.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -9,7 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,7 +34,9 @@ public class HomeActivity extends AppCompatActivity
     @BindView(R.id.cases_view_pager)
     ViewPager casesViewPager;
 
+    NavigationView navigationView;
     CasesPagerAdapter casesPagerAdapter;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +44,27 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-      //  setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Legal");
+        //  setSupportActionBar(toolbar);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView userNameTextView = headerView.findViewById(R.id.user_name_text_view);
+        userNameTextView.setText(SharedPreferenceManager.getInstance(HomeActivity.this).getString(Constants.USER_NAME));
+
+        navigationView.getMenu().getItem(0).setActionView(R.layout.menu_layout);
+        navigationView.getMenu().getItem(2).setActionView(R.layout.menu_layout);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(getPageTitles().get(0)));
@@ -64,7 +78,7 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    private List<String> getPageTitles(){
+    private List<String> getPageTitles() {
         List<String> pageTitleList = new ArrayList<>();
         pageTitleList.add(Utilities.getTodayDate());
         pageTitleList.add(Utilities.getTomorrowDate());
@@ -86,26 +100,75 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
+        switch (item.getItemId()) {
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
+            case R.id.nav_cases:
+                navigationView.getMenu().setGroupVisible(R.id.cases_options, true);
+                navigationView.getMenu().setGroupVisible(R.id.main_option, false);
+                break;
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+            case R.id.nav_upcoming_cases :
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
+            case R.id.nav_all_cases:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, AllCasesActivity.class));
+                break;
+
+            case R.id.nav_option_cases :
+                navigationView.getMenu().setGroupVisible(R.id.cases_options, false);
+                navigationView.getMenu().setGroupVisible(R.id.main_option, true);
+                break;
+
+            case R.id.nav_lawyer_support_desk :
+                navigationView.getMenu().setGroupVisible(R.id.main_option, false);
+                navigationView.getMenu().setGroupVisible(R.id.lawyer_support_options, true);
+                break;
+
+            case R.id.nav_option_lawyer_support_desk:
+                navigationView.getMenu().setGroupVisible(R.id.main_option, true);
+                navigationView.getMenu().setGroupVisible(R.id.lawyer_support_options, false);
+                break;
+
+            case R.id.nav_matter_received :
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, MatterReceivedActivity.class));
+                break;
+
+            case R.id.nav_matter_sent :
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, MatterSentActivity.class));
+                break;
+
+            case R.id.nav_password_reset :
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, PasswordResetActivity.class));
+                break;
+
+            case R.id.nav_counsel_desk :
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, CounselDeskActivity.class));
+                break;
+
+            case R.id.nav_legal_queries:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, LegalQueriesActivity.class));
+                break;
+
+            case R.id.nav_logout :
+                SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.FIRM_ID, "");
+                SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.USER_TYPE, "");
+                SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.USER_NAME, "");
+                SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.USER_ID, "");
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+                break;
+        }
+
+        return false;
     }
 }

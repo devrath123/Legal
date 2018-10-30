@@ -40,10 +40,10 @@ public class Utilities {
     }
 
     public static String getWeeklyDates() {
-        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 2;
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 
-        return "WEEKLY (" + day + "-" + getMonth(month) + " TO " + getWeekDate(day, month) + ")";
+        return "WEEKLY (" + getWeekDate(2,day,month) + " TO " + getWeekDate(7, day, month) + ")";
     }
 
     private static int getDaysInMonth(int month) {
@@ -77,12 +77,12 @@ public class Utilities {
         return 0;
     }
 
-    private static String getWeekDate(int day, int month) {
+    private static String getWeekDate(int dayToCompare, int day, int month) {
 
-        if (day + 5 > getDaysInMonth(month)) {
-            return (day + 5) - getDaysInMonth(month) + "-" + getMonth(month + 1);
+        if (day + dayToCompare > getDaysInMonth(month)) {
+            return (day + dayToCompare) - getDaysInMonth(month) + "-" + getMonth(month + 1);
         } else {
-            return (day + 5) + "-" + getMonth(month);
+            return (day + dayToCompare) + "-" + getMonth(month);
         }
     }
 

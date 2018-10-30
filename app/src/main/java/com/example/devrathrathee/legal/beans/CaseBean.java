@@ -10,6 +10,15 @@ public class CaseBean {
     List<CasesToday> cases_tomorrow;
     List<CasesToday> cases_today;
     List<CasesToday> cases_weekly;
+    List<CasesToday> case_all;
+
+    public List<CasesToday> getCase_all() {
+        return case_all;
+    }
+
+    public void setCase_all(List<CasesToday> case_all) {
+        this.case_all = case_all;
+    }
 
     public List<CasesToday> getCases_weekly() {
         return cases_weekly;

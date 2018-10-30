@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.AllCasesActivity"
+    tools:context=".views.CounselDeskActivity"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -16,9 +16,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_margin="10dp"
-        android:id="@+id/all_cases_rv"
+        android:id="@+id/counsel_desk_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </LinearLayout>

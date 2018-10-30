@@ -7,16 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentTop="true"
-    android:foregroundGravity="top"
+    android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,16 +20,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
-            android:background="?attr/colorPrimary">
+            android:layout_gravity="center_horizontal"
+            android:background="?attr/colorPrimary"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Legal"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Legal"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textStyle="bold" />-->
 
-        </android.support.v7.widget.Toolbar>
+        <!--</android.support.v7.widget.Toolbar>-->
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
@@ -57,6 +50,14 @@
             android:layout_below="@+id/tab_layout" />
 
     </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
 

@@ -1,5 +1,6 @@
 package com.example.devrathrathee.legal.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -54,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item,
+                (this, R.layout.login_spinner_item,
                         userTypeArray);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout
                 .simple_list_item_single_choice);
@@ -87,6 +88,10 @@ public class RegistrationActivity extends AppCompatActivity {
         } else {
             return "";
         }
+    }
+
+    public void login(View view){
+        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
     }
 
     public void onRegisterClick(View view) {

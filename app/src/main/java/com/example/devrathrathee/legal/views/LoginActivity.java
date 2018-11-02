@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item,
+                (this, R.layout.login_spinner_item,
                         userTypeArray);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout
                 .simple_list_item_single_choice);

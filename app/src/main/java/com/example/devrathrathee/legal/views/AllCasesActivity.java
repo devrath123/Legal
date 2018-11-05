@@ -1,5 +1,6 @@
 package com.example.devrathrathee.legal.views;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,8 @@ public class AllCasesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("All Cases");
 
         getTodayCases();
+
+        getWindow().setStatusBarColor(Color.parseColor("#009639"));
     }
 
     @Override

@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
-            android:drawableLeft="@drawable/user_type_icon"
+            android:drawableLeft="@drawable/full_name_icon"
             android:drawablePadding="2dp"
             android:inputType="text"
             android:maxLines="1"
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
-            android:drawableLeft="@drawable/user_type_icon"
+            android:drawableLeft="@drawable/mobile_icon"
             android:drawablePadding="2dp"
             android:inputType="number"
             android:maxLines="1"
@@ -179,12 +179,17 @@
             android:text="ALREADY HAVE AN ACCOUNT ?  "
             android:textColor="@android:color/white" />
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/user_type_icon"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="login"
-            android:text="LOGIN"
+            android:text="  LOGIN"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 

@@ -121,12 +121,17 @@
             android:text="DON'T HAVE AN ACCOUNT ?  "
             android:textColor="@android:color/white" />
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/add_user"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="register"
-            android:text="Register"
+            android:text="  Register"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 

@@ -74,15 +74,18 @@
 
         <item
             android:id="@+id/nav_upcoming_cases"
-            android:title="Upcoming Cases" />
+            android:title="Upcoming Cases"
+            android:icon="@drawable/upcomin_cases"/>
 
         <item
             android:id="@+id/nav_all_cases"
-            android:title="All Cases" />
+            android:title="All Cases"
+            android:icon="@drawable/case_icon"/>
 
         <item
             android:id="@+id/nav_calendar"
-            android:title="Calendar" />
+            android:title="Calendar"
+            android:icon="@drawable/calendar"/>
 
     </group>
 
@@ -99,11 +102,13 @@
 
         <item
             android:id="@+id/nav_matter_received"
-            android:title="Matter Received" />
+            android:title="Matter Received"
+            android:icon="@drawable/matter_received"/>
 
         <item
             android:id="@+id/nav_matter_sent"
-            android:title="Matter Sent" />
+            android:title="Matter Sent"
+            android:icon="@drawable/matter_sent"/>
 
 
     </group>

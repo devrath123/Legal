@@ -157,6 +157,11 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(new Intent(HomeActivity.this, LegalQueriesActivity.class));
                 break;
 
+            case R.id.nav_account_details :
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, AccountDetailsActivity.class));
+                break;
+
             case R.id.nav_logout :
                 SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.FIRM_ID, "");
                 SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.USER_TYPE, "");

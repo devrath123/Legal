@@ -46,7 +46,6 @@ public class AllCasesActivity extends AppCompatActivity {
 
         getTodayCases();
 
-        getWindow().setStatusBarColor(Color.parseColor("#009639"));
     }
 
     @Override

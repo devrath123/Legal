@@ -15,5 +15,7 @@
     <style name="Spinner" parent="Widget.AppCompat.Spinner">
         <item name="backgroundTint">@android:color/white</item>
     </style>
-
+    <style name="CustomTabText" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>

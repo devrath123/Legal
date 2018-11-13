@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -76,6 +77,25 @@ public class HomeActivity extends AppCompatActivity
         casesViewPager.setAdapter(casesPagerAdapter);
         tabLayout.setupWithViewPager(casesViewPager);
 
+        reduceMarginsInTabs(tabLayout,30);
+
+    }
+
+    public static void reduceMarginsInTabs(TabLayout tabLayout, int marginOffset) {
+
+        View tabStrip = tabLayout.getChildAt(0);
+        if (tabStrip instanceof ViewGroup) {
+            ViewGroup tabStripGroup = (ViewGroup) tabStrip;
+            for (int i = 0; i < ((ViewGroup) tabStrip).getChildCount(); i++) {
+                View tabView = tabStripGroup.getChildAt(i);
+                if (tabView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+                    ((ViewGroup.MarginLayoutParams) tabView.getLayoutParams()).leftMargin = marginOffset;
+                    ((ViewGroup.MarginLayoutParams) tabView.getLayoutParams()).rightMargin = marginOffset;
+                }
+            }
+
+            tabLayout.requestLayout();
+        }
     }
 
     private List<String> getPageTitles() {

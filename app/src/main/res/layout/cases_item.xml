@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:utils="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_margin="5dp"
@@ -31,21 +32,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Court Name: "
                     android:textColor="@android:color/black"
-                    android:textStyle="bold" />
+                    utils:RobotoBold="Roboto-Bold.ttf" />
 
-                <TextView
+                <com.example.devrathrathee.legal.utils.RobotoRegularTextView
                     android:id="@+id/court_name_tv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    utils:RobotoRegular="Roboto-Regular.ttf"/>
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp">
@@ -61,7 +65,9 @@
                     android:id="@+id/case_number_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10" />
+                    android:layout_weight="10"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -75,9 +81,11 @@
                     android:id="@+id/parties_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7" />
+                    android:layout_weight="7"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

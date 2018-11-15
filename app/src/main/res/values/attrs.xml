@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RobotoBoldTextView">
+        <attr name="RobotoBold" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="RobotoRegularTextView">
+        <attr name="RobotoRegular" format="string" />
+    </declare-styleable>
+</resources>

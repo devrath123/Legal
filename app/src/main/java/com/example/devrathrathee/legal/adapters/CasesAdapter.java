@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.utils.Constants;
+import com.example.devrathrathee.legal.utils.RobotoLightTextView;
 import com.example.devrathrathee.legal.utils.RobotoRegularTextView;
 import com.example.devrathrathee.legal.views.CaseDetailsActivity;
 
@@ -69,8 +70,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.TodayCasesVi
     public static class TodayCasesViewHolder extends RecyclerView.ViewHolder {
 
         RelativeLayout cardRelativeLayout;
-        TextView next_date_tv, parties_name_tv, stage_tv,case_number_tv;
-        RobotoRegularTextView court_name_tv;
+        RobotoLightTextView court_name_tv,case_number_tv,parties_name_tv,next_date_tv, stage_tv;
 
         public TodayCasesViewHolder(@NonNull View itemView) {
             super(itemView);

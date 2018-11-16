@@ -23,7 +23,9 @@ import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
 import com.example.devrathrathee.legal.utils.Utilities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -58,7 +60,9 @@ public class AccountDetailsActivity extends AppCompatActivity {
     @BindView(R.id.practise_areas_spinner)
     Spinner practise_areas_spinner;
 
-    String[] languagesArray = new String[]{"English","Marathi", "Hindi", "Gujarati"};
+    String[] languagesArray = new String[]{"English", "Marathi", "Hindi", "Gujarati"};
+    ArrayAdapter<String> practiseAreaArrayAdapter;
+    List<String> practiseList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ArrayAdapter<String> languageArrayAdapter = new ArrayAdapter<String>
-                (this, R.layout.support_simple_spinner_dropdown_item,
+                (this, R.layout.account_details_spinner_item,
                         languagesArray);
         languageArrayAdapter.setDropDownViewResource(android.R.layout
                 .simple_list_item_single_choice);
@@ -78,7 +82,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               // selectedUserType = (String) parent.getSelectedItem();
+                // selectedUserType = (String) parent.getSelectedItem();
             }
 
             @Override
@@ -94,6 +98,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Account Details");
 
+        practiceArea();
         accountDetails();
     }
 
@@ -104,6 +109,10 @@ public class AccountDetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void update(View view) {
+
     }
 
     private void accountDetails() {
@@ -131,7 +140,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         Utilities.getRequestQueue(this).add(accountDetailsBeanGSONRequest);
     }
 
-    private void practiceArea(){
+    private void practiceArea() {
         Map<String, String> practiceMap = new HashMap<>();
         practiceMap.put("practice_area_dropdown", "");
 
@@ -141,7 +150,15 @@ public class AccountDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(PracticeAreaBean response) {
                         if (response.getPractice_area_dropdown().size() > 0) {
-                         //   setAccountDetails(response.getLawyer_account_details().get(0));
+                            practiseList.clear();
+
+                            for (PracticeAreaBean.PracticeAreaDropdown bean : response.getPractice_area_dropdown()) {
+                                practiseList.add(bean.getPa_name());
+                            }
+
+                            if (practiseList.size() > 0) {
+                                setPractiseSpinnerData(practiseList);
+                            }
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -155,7 +172,29 @@ public class AccountDetailsActivity extends AppCompatActivity {
         Utilities.getRequestQueue(this).add(practiceBeanGSONRequest);
     }
 
-    private void setAccountDetails(AccountDetailBean.LawyerAccountDetail accountDetails){
+    private void setPractiseSpinnerData(List<String> practiceAreaList) {
+        practiseAreaArrayAdapter = new ArrayAdapter<String>
+                (this, R.layout.account_details_spinner_item,
+                        practiceAreaList);
+        practiseAreaArrayAdapter.setDropDownViewResource(android.R.layout
+                .simple_list_item_single_choice);
+
+        practise_areas_spinner.setAdapter(practiseAreaArrayAdapter);
+
+        practise_areas_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // selectedUserType = (String) parent.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void setAccountDetails(AccountDetailBean.LawyerAccountDetail accountDetails) {
         firm_name_et.setText(accountDetails.getName());
         email_et.setText(accountDetails.getEmail());
         phone_et.setText(accountDetails.getPhone());

@@ -15,29 +15,23 @@ public class RobotoBoldTextView extends AppCompatTextView {
 
     public RobotoBoldTextView(Context context) {
         super(context);
-        initFont(null);
+        initFont(context,null);
     }
 
     public RobotoBoldTextView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initFont(attrs);
+        initFont(context,attrs);
     }
 
     public RobotoBoldTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initFont(attrs);
+        initFont(context,attrs);
     }
 
-    private void initFont(AttributeSet attrs) {
-
+    private void initFont(Context context, AttributeSet attrs) {
         if (attrs != null) {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RobotoRegularTextView);
-            String fontName = a.getString(R.styleable.RobotoRegularTextView_RobotoRegular);
-            if (fontName != null) {
-                Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/"+ fontName);
-                setTypeface(myTypeface);
-            }
-            a.recycle();
+            Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Bold.ttf");
+            this.setTypeface(face);
         }
     }
 }

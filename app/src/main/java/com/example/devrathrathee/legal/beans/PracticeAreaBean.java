@@ -15,7 +15,6 @@ public class PracticeAreaBean {
     }
 
     public static class PracticeAreaDropdown{
-
         String pa_name;
 
         public String getPa_name() {

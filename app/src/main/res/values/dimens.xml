@@ -8,4 +8,7 @@
     <dimen name="design_tab_text_size_2line" tools:override="true">10sp</dimen>
 
     <dimen name="edit_text_size">13sp</dimen>
+    <dimen name="margin_minus_5">-5dp</dimen>
+
+    <dimen name="dimen_15sp">15sp</dimen>
 </resources>

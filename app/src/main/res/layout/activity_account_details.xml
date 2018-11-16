@@ -43,117 +43,141 @@
                     android:layout_marginRight="20dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="Firm Name"
+                        android:textColor="@android:color/black"
                         android:textSize="13sp" />
 
                     <EditText
                         android:id="@+id/firm_name_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
 
-                    <TextView
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="Email"
+                        android:textColor="@android:color/black"
                         android:textSize="13sp" />
 
                     <EditText
                         android:id="@+id/email_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
 
-                    <TextView
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="Phone"
+                        android:textColor="@android:color/black"
                         android:textSize="13sp" />
 
                     <EditText
                         android:id="@+id/phone_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
 
-                    <TextView
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Website" />
+                        android:text="Website"
+                        android:textColor="@android:color/black" />
 
                     <EditText
                         android:id="@+id/website_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
 
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Select Language"
+                        android:textColor="@android:color/black" />
+
                     <Spinner
                         android:id="@+id/language_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                        android:layout_height="wrap_content" />
 
-                    <TextView
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Address" />
+                        android:layout_marginTop="15dp"
+                        android:text="Address"
+                        android:textColor="@android:color/black" />
 
                     <EditText
                         android:id="@+id/address_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
 
-                    <TextView
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="About Us" />
+                        android:layout_marginTop="15dp"
+                        android:text="About Us"
+                        android:textColor="@android:color/black" />
 
                     <EditText
                         android:id="@+id/about_us_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
 
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Practics Areas"
+                        android:textColor="@android:color/black" />
+
                     <Spinner
                         android:id="@+id/practise_areas_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" />
+                        android:layout_height="wrap_content" />
 
-                    <TextView
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Practise Courts" />
+                        android:layout_marginTop="15dp"
+                        android:text="Practise Courts"
+                        android:textColor="@android:color/black" />
 
                     <EditText
                         android:id="@+id/practise_courts_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
@@ -161,12 +185,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="15dp">
 
-                        <TextView
+                        <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Availability" />
+                            android:layout_marginTop="5dp"
+                            android:text="Availability"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/edit_text_size" />
 
                         <RadioGroup
                             android:layout_width="wrap_content"
@@ -174,14 +201,17 @@
                             android:orientation="horizontal">
 
                             <RadioButton
+                                android:id="@+id/yes_radio_button"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Yes" />
+                                android:text="Yes"
+                                android:textSize="@dimen/edit_text_size"/>
 
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="No" />
+                                android:text="No"
+                                android:textSize="@dimen/edit_text_size"/>
 
                         </RadioGroup>
 
@@ -190,9 +220,10 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="30dp"
                         android:background="@android:color/black"
+                        android:onClick="update"
                         android:text="Update"
                         android:textColor="@android:color/white" />
 

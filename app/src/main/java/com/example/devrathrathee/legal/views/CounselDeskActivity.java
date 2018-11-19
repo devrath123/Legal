@@ -34,7 +34,6 @@ public class CounselDeskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counsel_desk);
 
-
         counsel_desk_rv = findViewById(R.id.counsel_desk_rv);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

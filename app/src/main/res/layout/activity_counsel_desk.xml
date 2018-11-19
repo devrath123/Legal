@@ -4,20 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.CounselDeskActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".views.CounselDeskActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        />
+        android:background="@android:color/black"
+        app:titleTextColor="@android:color/white" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_margin="10dp"
-        android:id="@+id/counsel_desk_rv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/white_background">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/counsel_desk_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp" />
+
+    </RelativeLayout>
 
 </LinearLayout>

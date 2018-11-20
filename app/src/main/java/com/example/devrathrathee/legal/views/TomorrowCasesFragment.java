@@ -1,7 +1,9 @@
 package com.example.devrathrathee.legal.views;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +31,7 @@ import java.util.Map;
 public class TomorrowCasesFragment extends Fragment {
 
     RecyclerView tomorrowRV;
-   // ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
 
     public TomorrowCasesFragment() {
     }
@@ -48,12 +50,25 @@ public class TomorrowCasesFragment extends Fragment {
 
         tomorrowRV = view.findViewById(R.id.tomorrow_cases_rv);
 
-      //  progressDialog = new ProgressDialog(getActivity());
-      //  progressDialog.setMessage("Loading...");
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.add_case_fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AddCaseActivity.class));
+            }
+        });
 
-        getTomorrowCases();
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getTomorrowCases();
     }
 
     private void getTomorrowCases() {
@@ -62,14 +77,14 @@ public class TomorrowCasesFragment extends Fragment {
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_ID));
 
-     //   progressDialog.show();
+        progressDialog.show();
 
         GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_TOMORROW, CaseBean.class, todayCasesMap,
                 new Response.Listener<CaseBean>() {
                     @Override
                     public void onResponse(CaseBean response) {
 
-                    //    progressDialog.dismiss();
+                        progressDialog.dismiss();
                         if (response.getCases_tomorrow() != null) {
                             setAdapter(response.getCases_tomorrow());
                         }
@@ -77,7 +92,7 @@ public class TomorrowCasesFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-             //   progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
 

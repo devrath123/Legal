@@ -68,7 +68,10 @@ public class CaseDetailsActivity extends AppCompatActivity {
 
     @OnClick(R.id.edit_case_details_iv)
     public void editCaseDetailsClick(View view) {
-
+        Intent intent = new Intent(CaseDetailsActivity.this, AddCaseActivity.class);
+        intent.putExtra(Constants.INTENT_ADD_EDIT, Constants.INTENT_EDIT);
+        intent.putExtra(Constants.INTENT_CASE, getCaseBean());
+        startActivity(intent);
     }
 
     @Override

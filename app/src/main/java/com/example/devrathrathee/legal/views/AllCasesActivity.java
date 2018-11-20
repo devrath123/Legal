@@ -1,5 +1,6 @@
 package com.example.devrathrathee.legal.views;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +34,7 @@ public class AllCasesActivity extends AppCompatActivity {
 
     RecyclerView allCasesRV;
     FloatingActionButton fab;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +51,22 @@ public class AllCasesActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("All Cases");
 
-        getTodayCases();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllCases();
     }
 
     @Override
@@ -70,19 +79,19 @@ public class AllCasesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getTodayCases() {
+    private void getAllCases() {
         Map<String, String> todayCasesMap = new HashMap<>();
         todayCasesMap.put("action", "select");
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_ID));
 
-        // progressDialog.show();
+         progressDialog.show();
         GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_ALL, CaseBean.class, todayCasesMap,
 
                 new Response.Listener<CaseBean>() {
                     @Override
                     public void onResponse(CaseBean response) {
-                        //   progressDialog.dismiss();
+                           progressDialog.dismiss();
                         if (response.getCase_all() != null) {
                             setAdapter(response.getCase_all());
                         }
@@ -90,7 +99,7 @@ public class AllCasesActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //   progressDialog.dismiss();
+                  progressDialog.dismiss();
             }
         });
 

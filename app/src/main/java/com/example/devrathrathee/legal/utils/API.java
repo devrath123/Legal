@@ -13,4 +13,6 @@ public interface API {
     String COUNSEL_DESK = "lawyer_counselor.php";
     String LEGAL_QUERIES = "manage_quotes.php";
     String ACCOUNT_DETAILS = "lawyer_account.php";
+    String MATTER_RECEIVED = "matter_recieved.php";
+    String MATTER_SENT = "matter_sent.php";
 }

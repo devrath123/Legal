@@ -1,5 +1,6 @@
 package com.example.devrathrathee.legal.views;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ import java.util.Map;
 public class CounselDeskActivity extends AppCompatActivity {
 
     RecyclerView counsel_desk_rv;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class CounselDeskActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Cases Diary");
@@ -49,7 +54,6 @@ public class CounselDeskActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
@@ -63,13 +67,13 @@ public class CounselDeskActivity extends AppCompatActivity {
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(CounselDeskActivity.this).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(CounselDeskActivity.this).getString(Constants.USER_ID));
 
-        // progressDialog.show();
+        progressDialog.show();
         GSONRequest<CounselDeskBean> casesTodayBeanGSONRequest = new GSONRequest<>(Request.Method.POST, API.BASE_URL + API.COUNSEL_DESK, CounselDeskBean.class, todayCasesMap,
 
                 new Response.Listener<CounselDeskBean>() {
                     @Override
                     public void onResponse(CounselDeskBean response) {
-
+                        progressDialog.dismiss();
                         if (response.getLawyer_counselor() != null) {
                             setAdapter(response.getLawyer_counselor());
                         }
@@ -77,7 +81,7 @@ public class CounselDeskActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //   progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
 

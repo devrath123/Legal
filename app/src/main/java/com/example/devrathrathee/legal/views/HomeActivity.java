@@ -137,6 +137,11 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(new Intent(HomeActivity.this, AllCasesActivity.class));
                 break;
 
+            case R.id.nav_professional_fees:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, ProfessionalFeeActivity.class));
+                break;
+
             case R.id.nav_option_cases :
                 navigationView.getMenu().setGroupVisible(R.id.cases_options, false);
                 navigationView.getMenu().setGroupVisible(R.id.main_option, true);

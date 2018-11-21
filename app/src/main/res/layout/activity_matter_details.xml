@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.CaseDetailsActivity">
+    tools:context=".views.CounselDetailsActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -27,7 +27,9 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="40dp"
+            android:background="@android:color/white"
             android:elevation="5dp"
+            android:orientation="vertical"
             app:cardCornerRadius="5dp">
 
             <TextView
@@ -35,20 +37,36 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/black" />
 
-            <ImageView
-                android:id="@+id/edit_case_details_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_margin="10dp"
-                android:background="@drawable/edit_icon_32"
-                android:padding="5dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="15dp">
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Lawyer"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
+                        android:id="@+id/lawyer_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,28 +114,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Case no"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
-                        android:id="@+id/case_number_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -134,75 +130,6 @@
 
                     <com.example.devrathrathee.legal.utils.RobotoLightTextView
                         android:id="@+id/parties_name_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Next Date"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
-                        android:id="@+id/next_date_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Stage"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
-                        android:id="@+id/stage_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Prev date"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/dimen_15sp" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
-                        android:id="@+id/prev_date_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
@@ -243,12 +170,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Client Phone"
+                        android:text="Stage"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
                     <com.example.devrathrathee.legal.utils.RobotoLightTextView
-                        android:id="@+id/client_phone_tv"
+                        android:id="@+id/stage_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
@@ -260,19 +187,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginTop="15dp">
 
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Category"
+                        android:text="Next date"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
                     <com.example.devrathrathee.legal.utils.RobotoLightTextView
-                        android:id="@+id/category_tv"
+                        android:id="@+id/next_date_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
@@ -280,7 +206,10 @@
                         android:textSize="@dimen/dimen_15sp" />
 
                 </LinearLayout>
+
             </LinearLayout>
+
         </android.support.v7.widget.CardView>
     </LinearLayout>
+
 </LinearLayout>

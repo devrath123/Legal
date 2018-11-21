@@ -15,4 +15,5 @@ public interface API {
     String ACCOUNT_DETAILS = "lawyer_account.php";
     String MATTER_RECEIVED = "matter_recieved.php";
     String MATTER_SENT = "matter_sent.php";
+    String CASE_PAYMENT = "cases_payment.php";
 }

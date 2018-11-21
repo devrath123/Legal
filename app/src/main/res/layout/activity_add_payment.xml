@@ -47,62 +47,55 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Court Name"
-                        android:textColor="@android:color/black"
-                        android:textSize="13sp" />
-
-                    <EditText
-                        android:id="@+id/court_name_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_minus_5"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textSize="@dimen/edit_text_size" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="Court Number"
-                        android:textColor="@android:color/black"
-                        android:textSize="13sp" />
-
-                    <EditText
-                        android:id="@+id/court_number_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_minus_5"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textSize="@dimen/edit_text_size" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:text="Case Number"
                         android:textColor="@android:color/black"
                         android:textSize="13sp" />
 
+                    <Spinner
+                        android:id="@+id/case_number_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Payment Mode"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+
+                    <Spinner
+                        android:id="@+id/payment_mode_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Payment Amount"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+
                     <EditText
-                        android:id="@+id/case_number_et"
+                        android:id="@+id/payment_amount_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
+                        android:inputType="number"
                         android:textSize="@dimen/edit_text_size" />
 
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Judge Name"
+                        android:text="Cheque/Card Number"
                         android:textColor="@android:color/black" />
 
                     <EditText
-                        android:id="@+id/judge_name_et"
+                        android:id="@+id/cheque_number_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_minus_5"
@@ -115,11 +108,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Select next Date"
+                        android:text="Payment Date"
                         android:textColor="@android:color/black" />
 
                     <EditText
-                        android:id="@+id/select_next_date_et"
+                        android:id="@+id/payment_date_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_minus_5"
@@ -133,92 +126,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="Select Category"
-                        android:textColor="@android:color/black" />
-
-                    <Spinner
-                        android:id="@+id/category_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="Client Name"
+                        android:text="Comments"
                         android:textColor="@android:color/black" />
 
                     <EditText
-                        android:id="@+id/client_name_et"
+                        android:id="@+id/comments_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_minus_5"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/edit_text_size" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="Client Phone"
-                        android:textColor="@android:color/black" />
-
-                    <EditText
-                        android:id="@+id/client_phone_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_minus_5"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textSize="@dimen/edit_text_size" />
-
-                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="Select Stage"
-                        android:textColor="@android:color/black" />
-
-                    <Spinner
-                        android:id="@+id/stage_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/party_a_et"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_minus_5"
-                            android:hint="Party A"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textSize="@dimen/edit_text_size" />
-
-                        <com.example.devrathrathee.legal.utils.RobotoBoldTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:text="VS" />
-
-                        <EditText
-                            android:id="@+id/party_b_et"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_minus_5"
-                            android:hint="Party B"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textSize="@dimen/edit_text_size" />
-
-                    </LinearLayout>
 
                     <Button
                         android:id="@+id/add_case_button"

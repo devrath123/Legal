@@ -1,5 +1,8 @@
 package com.example.devrathrathee.legal.beans;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class MatterReceivedBean {
@@ -23,9 +26,36 @@ public class MatterReceivedBean {
         this.lawyer_matter_rec = lawyer_matter_rec;
     }
 
-    public static class MatterReceived {
+    public static class MatterReceived implements Parcelable{
         String lawyer_case_id, name, phone, email, court_name, court_number, judge_name, client_name,
                 parties, stage, next_date, counsel_name;
+
+        protected MatterReceived(Parcel in) {
+            lawyer_case_id = in.readString();
+            name = in.readString();
+            phone = in.readString();
+            email = in.readString();
+            court_name = in.readString();
+            court_number = in.readString();
+            judge_name = in.readString();
+            client_name = in.readString();
+            parties = in.readString();
+            stage = in.readString();
+            next_date = in.readString();
+            counsel_name = in.readString();
+        }
+
+        public static final Creator<MatterReceived> CREATOR = new Creator<MatterReceived>() {
+            @Override
+            public MatterReceived createFromParcel(Parcel in) {
+                return new MatterReceived(in);
+            }
+
+            @Override
+            public MatterReceived[] newArray(int size) {
+                return new MatterReceived[size];
+            }
+        };
 
         public String getLawyer_case_id() {
             return lawyer_case_id;
@@ -121,6 +151,27 @@ public class MatterReceivedBean {
 
         public void setCounsel_name(String counsel_name) {
             this.counsel_name = counsel_name;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeString(lawyer_case_id);
+            parcel.writeString(name);
+            parcel.writeString(phone);
+            parcel.writeString(email);
+            parcel.writeString(court_name);
+            parcel.writeString(court_number);
+            parcel.writeString(judge_name);
+            parcel.writeString(client_name);
+            parcel.writeString(parties);
+            parcel.writeString(stage);
+            parcel.writeString(next_date);
+            parcel.writeString(counsel_name);
         }
     }
 }

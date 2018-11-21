@@ -39,6 +39,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AddCaseActivity extends AppCompatActivity {
 
@@ -237,6 +238,7 @@ public class AddCaseActivity extends AppCompatActivity {
         return false;
     }
 
+    @OnClick(R.id.add_case_button)
     public void addCase(View view) {
 
         if (validateInput()) {

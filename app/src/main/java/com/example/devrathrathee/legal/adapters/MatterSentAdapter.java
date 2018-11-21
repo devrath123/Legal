@@ -18,30 +18,30 @@ import com.example.devrathrathee.legal.views.MatterDetailsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatterReceivedAdapter extends RecyclerView.Adapter<MatterReceivedAdapter.MatterReceivedViewHolder> {
+public class MatterSentAdapter extends RecyclerView.Adapter<MatterSentAdapter.MatterSentViewHolder>{
 
     Context context;
     List<MatterReceivedBean.MatterReceived> matterReceivedList = new ArrayList<>();
 
-    public MatterReceivedAdapter(Context context, List<MatterReceivedBean.MatterReceived> matterReceivedList) {
+    public MatterSentAdapter(Context context, List<MatterReceivedBean.MatterReceived> matterReceivedList) {
         this.context = context;
         this.matterReceivedList.addAll(matterReceivedList);
     }
 
     @NonNull
     @Override
-    public MatterReceivedViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public MatterSentAdapter.MatterSentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.matter_received_item, viewGroup, false);
+                .inflate(R.layout.matter_sent_item, viewGroup, false);
 
-        return new MatterReceivedAdapter.MatterReceivedViewHolder(itemView);
+        return new MatterSentAdapter.MatterSentViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final @NonNull MatterReceivedViewHolder matterReceivedViewHolder, int i) {
+    public void onBindViewHolder(final @NonNull MatterSentAdapter.MatterSentViewHolder matterReceivedViewHolder, int i) {
 
         MatterReceivedBean.MatterReceived matterReceived = matterReceivedList.get(i);
-        matterReceivedViewHolder.lawyer_tv.setText(matterReceived.getName());
+        matterReceivedViewHolder.court_tv.setText(matterReceived.getCourt_name());
         matterReceivedViewHolder.parties_tv.setText(matterReceived.getParties());
         matterReceivedViewHolder.client_tv.setText(matterReceived.getClient_name());
 
@@ -63,15 +63,15 @@ public class MatterReceivedAdapter extends RecyclerView.Adapter<MatterReceivedAd
     }
 
 
-    public static class MatterReceivedViewHolder extends RecyclerView.ViewHolder {
+    public static class MatterSentViewHolder extends RecyclerView.ViewHolder {
 
         RelativeLayout cardRelativeLayout;
-        TextView lawyer_tv, parties_tv, client_tv;
+        TextView court_tv, parties_tv, client_tv;
 
-        public MatterReceivedViewHolder(@NonNull View itemView) {
+        public MatterSentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            lawyer_tv = itemView.findViewById(R.id.lawyer_tv);
+            court_tv = itemView.findViewById(R.id.court_tv);
             client_tv = itemView.findViewById(R.id.client_tv);
             parties_tv = itemView.findViewById(R.id.parties_tv);
             cardRelativeLayout = itemView.findViewById(R.id.card_relative_layout);

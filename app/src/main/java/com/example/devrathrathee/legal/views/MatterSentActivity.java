@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.adapters.MatterReceivedAdapter;
+import com.example.devrathrathee.legal.adapters.MatterSentAdapter;
 import com.example.devrathrathee.legal.beans.MatterReceivedBean;
 import com.example.devrathrathee.legal.utils.API;
 import com.example.devrathrathee.legal.utils.Constants;
@@ -85,7 +86,7 @@ public class MatterSentActivity extends AppCompatActivity {
     }
 
     private void setMessageReceived(List<MatterReceivedBean.MatterReceived> matterReceivedList) {
-        MatterReceivedAdapter matterReceivedAdapter = new MatterReceivedAdapter(MatterSentActivity.this, matterReceivedList);
+        MatterSentAdapter matterReceivedAdapter = new MatterSentAdapter(MatterSentActivity.this, matterReceivedList);
         matter_sent_rv.setAdapter(matterReceivedAdapter);
         matterReceivedAdapter.notifyDataSetChanged();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MatterSentActivity.this);

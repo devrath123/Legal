@@ -14,6 +14,8 @@ public interface Constants {
    String INTENT_CASE = "Case";
    String INTENT_COUNSEL = "Counsel";
    String INTENT_LEGAL_QUERY = "Legal_Query";
+   String INTENT_MATTER = "Matter";
+   String INTENT_PAYMENT_DETAIL = "Payment";
 
    String INTENT_ADD_EDIT = "AddEdit";
    String INTENT_EDIT = "Edit";

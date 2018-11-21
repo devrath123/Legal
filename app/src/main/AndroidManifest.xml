@@ -43,7 +43,11 @@
         <activity android:name=".views.LegalQueriesActivity" />
         <activity android:name=".views.QueryDetailsActivity" />
         <activity android:name=".views.AccountDetailsActivity" />
-        <activity android:name=".views.AddCaseActivity"></activity>
+        <activity android:name=".views.AddCaseActivity" />
+        <activity android:name=".views.MatterDetailsActivity" />
+        <activity android:name=".views.ProfessionalFeeActivity" />
+        <activity android:name=".views.ProfessionFeeDetailActivity" />
+        <activity android:name=".views.AddPaymentActivity"></activity>
     </application>
 
 </manifest>

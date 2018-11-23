@@ -14,6 +14,7 @@ import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.beans.RegistrationBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -54,17 +55,19 @@ public class PasswordResetActivity extends AppCompatActivity {
 
 
     public void resetPassword(View view){
+        if (Connectivity.isConnected(PasswordResetActivity.this)) {
+            if (passwordET.getText().toString().trim().length() > 0 && newPasswordET.getText().toString().trim().length() > 0 && confirmPasswordET.getText().toString().trim().length() > 0) {
+                if (newPasswordET.getText().toString().equals(confirmPasswordET.getText().toString())) {
+                    resetPassword();
+                } else {
+                    Utilities.showToast(PasswordResetActivity.this, "New Password and Confirm Password should be same");
+                }
 
-        if (passwordET.getText().toString().trim().length() > 0 && newPasswordET.getText().toString().trim().length() > 0 && confirmPasswordET.getText().toString().trim().length() > 0){
-
-            if (newPasswordET.getText().toString().equals(confirmPasswordET.getText().toString())){
-                resetPassword();
-            }else{
-                Utilities.showToast(PasswordResetActivity.this, "New Password and Confirm Password should be same");
+            } else {
+                Utilities.showToast(PasswordResetActivity.this, "Enter all passwords");
             }
-
         }else{
-            Utilities.showToast(PasswordResetActivity.this, "Enter all passwords");
+            Utilities.internetConnectionError(PasswordResetActivity.this);
         }
 
     }

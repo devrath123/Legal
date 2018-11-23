@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.beans.RegistrationBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.Utilities;
 
@@ -98,42 +99,46 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void onRegisterClick(View view) {
 
-        if (nameEt.getText().toString().length() > 0 && mobileEt.getText().toString().length() > 0 &&
-                emailEt.getText().toString().length() > 0 && passwordEt.getText().toString().length() > 0) {
-           if (!getSelectedUserType(selectedUserType).equals("")){
+        if (Connectivity.isConnected(RegistrationActivity.this)) {
+            if (nameEt.getText().toString().length() > 0 && mobileEt.getText().toString().length() > 0 &&
+                    emailEt.getText().toString().length() > 0 && passwordEt.getText().toString().length() > 0) {
+                if (!getSelectedUserType(selectedUserType).equals("")) {
 
-               Map<String,String> registrationMap = new HashMap<>();
-               registrationMap.put("usertype", getSelectedUserType(selectedUserType));
-               registrationMap.put("name",nameEt.getText().toString());
-               registrationMap.put("phone",mobileEt.getText().toString());
-               registrationMap.put("email",emailEt.getText().toString());
-               registrationMap.put("password",passwordEt.getText().toString());
+                    Map<String, String> registrationMap = new HashMap<>();
+                    registrationMap.put("usertype", getSelectedUserType(selectedUserType));
+                    registrationMap.put("name", nameEt.getText().toString());
+                    registrationMap.put("phone", mobileEt.getText().toString());
+                    registrationMap.put("email", emailEt.getText().toString());
+                    registrationMap.put("password", passwordEt.getText().toString());
 
-               GSONRequest<RegistrationBean> registrationBeanGSONRequest = new GSONRequest<RegistrationBean>(Request.Method.POST, API.BASE_URL + API.REGISTRATION, RegistrationBean.class,
-                       registrationMap, new Response.Listener<RegistrationBean>() {
-                   @Override
-                   public void onResponse(RegistrationBean response) {
-                        if (response.getSuccess() == 1){
-                            Utilities.showToast(RegistrationActivity.this,"Registration successful");
-                            finish();
+                    GSONRequest<RegistrationBean> registrationBeanGSONRequest = new GSONRequest<RegistrationBean>(Request.Method.POST, API.BASE_URL + API.REGISTRATION, RegistrationBean.class,
+                            registrationMap, new Response.Listener<RegistrationBean>() {
+                        @Override
+                        public void onResponse(RegistrationBean response) {
+                            if (response.getSuccess() == 1) {
+                                Utilities.showToast(RegistrationActivity.this, "Registration successful");
+                                finish();
+                            }
                         }
-                   }
-               }, new Response.ErrorListener() {
-                   @Override
-                   public void onErrorResponse(VolleyError error) {
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
-                   }
-               });
+                        }
+                    });
 
-               registrationBeanGSONRequest.setShouldCache(false);
-               Utilities.getRequestQueue(RegistrationActivity.this).add(registrationBeanGSONRequest);
+                    registrationBeanGSONRequest.setShouldCache(false);
+                    Utilities.getRequestQueue(RegistrationActivity.this).add(registrationBeanGSONRequest);
 
-           }else{
-               Utilities.showToast(RegistrationActivity.this, "Select user type");
-           }
+                } else {
+                    Utilities.showToast(RegistrationActivity.this, "Select user type");
+                }
 
-        } else {
-            Utilities.showToast(RegistrationActivity.this, "Enter all fields");
+            } else {
+                Utilities.showToast(RegistrationActivity.this, "Enter all fields");
+            }
+        }else{
+            Utilities.internetConnectionError(RegistrationActivity.this);
         }
 
     }

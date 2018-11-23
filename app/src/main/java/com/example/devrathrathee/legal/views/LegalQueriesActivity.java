@@ -16,6 +16,7 @@ import com.example.devrathrathee.legal.adapters.LegalQueryAdapter;
 import com.example.devrathrathee.legal.beans.CounselDeskBean;
 import com.example.devrathrathee.legal.beans.LegalQueryBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -44,7 +45,11 @@ public class LegalQueriesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Manage Queries");
 
-        getLegalQueries();
+        if (Connectivity.isConnected(LegalQueriesActivity.this)) {
+            getLegalQueries();
+        }else{
+            Utilities.internetConnectionError(LegalQueriesActivity.this);
+        }
 
     }
 

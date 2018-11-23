@@ -24,6 +24,7 @@ import com.example.devrathrathee.legal.beans.AccountDetailBean;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.beans.RegistrationBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.RobotoBoldTextView;
@@ -99,7 +100,7 @@ public class AddCaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT)) {
+        if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT_CASE)) {
             getSupportActionBar().setTitle("Update Case");
             addCaseButton.setText("Update");
             setCaseDetails(getCaseDetails());
@@ -191,8 +192,8 @@ public class AddCaseActivity extends AppCompatActivity {
     }
 
     private String getAddEditIntent() {
-        if (getIntent() != null && getIntent().getStringExtra(Constants.INTENT_ADD_EDIT) != null) {
-            return getIntent().getStringExtra(Constants.INTENT_ADD_EDIT);
+        if (getIntent() != null && getIntent().getStringExtra(Constants.INTENT_ADD_EDIT_CASE) != null) {
+            return getIntent().getStringExtra(Constants.INTENT_ADD_EDIT_CASE);
         }
 
         return null;
@@ -241,51 +242,54 @@ public class AddCaseActivity extends AppCompatActivity {
     @OnClick(R.id.add_case_button)
     public void addCase(View view) {
 
-        if (validateInput()) {
-            progressDialog.show();
-            String url;
+        if (Connectivity.isConnected(AddCaseActivity.this)) {
+            if (validateInput()) {
+                progressDialog.show();
+                String url;
 
-            if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT)) {
-                url = API.BASE_URL + API.CASES_ALL + "?action=update&filter[court_name]=" + courtNameEt.getText().toString() + "&case_id=" + getCaseDetails().getCase_id() + "&filter[case_number]=" + caseNumberEt.getText().toString() + "&filter[category]=" + selectedCategory +
-                        "&filter[client_name]=" + clientNameEt.getText().toString() + "&filter[next_date]=" + selectNextDate.getText().toString() + "&filter[client_phone]=" + clientPhoneEt.getText().toString() +
-                        "&filter[court_number]=" + courtNumberEt.getText().toString() + "&filter[judge_name]=" + judgeNameEt.getText().toString() + "&filter[party_a]=" + partyAEt.getText().toString() + "&filter[party_b]=" + partyBEt.getText().toString() +
-                        "&filter[stage]=" + selectedStage + "&user_type=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_TYPE) + "&filter[lawyer_id]=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID) +
-                        "&lawyer_id=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID);
+                if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT_CASE)) {
+                    url = API.BASE_URL + API.CASES_ALL + "?action=update&filter[court_name]=" + courtNameEt.getText().toString() + "&case_id=" + getCaseDetails().getCase_id() + "&filter[case_number]=" + caseNumberEt.getText().toString() + "&filter[category]=" + selectedCategory +
+                            "&filter[client_name]=" + clientNameEt.getText().toString() + "&filter[next_date]=" + selectNextDate.getText().toString() + "&filter[client_phone]=" + clientPhoneEt.getText().toString() +
+                            "&filter[court_number]=" + courtNumberEt.getText().toString() + "&filter[judge_name]=" + judgeNameEt.getText().toString() + "&filter[party_a]=" + partyAEt.getText().toString() + "&filter[party_b]=" + partyBEt.getText().toString() +
+                            "&filter[stage]=" + selectedStage + "&user_type=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_TYPE) + "&filter[lawyer_id]=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID) +
+                            "&lawyer_id=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID);
 
-            } else {
-                url = API.BASE_URL + API.CASES_ALL + "?action=insert2&filter[court_name]=" + courtNameEt.getText().toString() + "&filter[case_number]=" + caseNumberEt.getText().toString() + "&filter[category]=" + selectedCategory +
-                        "&filter[client_name]=" + clientNameEt.getText().toString() + "&filter[next_date]=" + selectNextDate.getText().toString() + "&filter[client_phone]=" + clientPhoneEt.getText().toString() +
-                        "&filter[court_number]=" + courtNumberEt.getText().toString() + "&filter[judge_name]=" + judgeNameEt.getText().toString() + "&filter[party_a]=" + partyAEt.getText().toString() + "&filter[party_b]=" + partyBEt.getText().toString() +
-                        "&filter[stage]=" + selectedStage + "&user_type=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_TYPE) + "&filter[lawyer_id]=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID) +
-                        "&lawyer_id=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID);
-            }
-            GSONRequest<RegistrationBean> addCaseGSONRequest = new GSONRequest<>(Request.Method.POST, url, RegistrationBean.class, null,
-
-                    new Response.Listener<RegistrationBean>() {
-                        @Override
-                        public void onResponse(RegistrationBean response) {
-                            progressDialog.dismiss();
-                            if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT)) {
-                                Utilities.showToast(AddCaseActivity.this, "Case updated");
-                            } else {
-                                Utilities.showToast(AddCaseActivity.this, "Case added");
-                            }
-
-                            Intent intent = new Intent(AddCaseActivity.this, HomeActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Utilities.serverError(AddCaseActivity.this);
+                } else {
+                    url = API.BASE_URL + API.CASES_ALL + "?action=insert2&filter[court_name]=" + courtNameEt.getText().toString() + "&filter[case_number]=" + caseNumberEt.getText().toString() + "&filter[category]=" + selectedCategory +
+                            "&filter[client_name]=" + clientNameEt.getText().toString() + "&filter[next_date]=" + selectNextDate.getText().toString() + "&filter[client_phone]=" + clientPhoneEt.getText().toString() +
+                            "&filter[court_number]=" + courtNumberEt.getText().toString() + "&filter[judge_name]=" + judgeNameEt.getText().toString() + "&filter[party_a]=" + partyAEt.getText().toString() + "&filter[party_b]=" + partyBEt.getText().toString() +
+                            "&filter[stage]=" + selectedStage + "&user_type=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_TYPE) + "&filter[lawyer_id]=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID) +
+                            "&lawyer_id=" + SharedPreferenceManager.getInstance(AddCaseActivity.this).getString(Constants.USER_ID);
                 }
-            });
+                GSONRequest<RegistrationBean> addCaseGSONRequest = new GSONRequest<>(Request.Method.POST, url, RegistrationBean.class, null,
 
-            addCaseGSONRequest.setShouldCache(false);
-            Utilities.getRequestQueue(this).add(addCaseGSONRequest);
+                        new Response.Listener<RegistrationBean>() {
+                            @Override
+                            public void onResponse(RegistrationBean response) {
+                                progressDialog.dismiss();
+                                if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT_CASE)) {
+                                    Utilities.showToast(AddCaseActivity.this, "Case updated");
+                                } else {
+                                    Utilities.showToast(AddCaseActivity.this, "Case added");
+                                }
+
+                                Intent intent = new Intent(AddCaseActivity.this, HomeActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Utilities.serverError(AddCaseActivity.this);
+                    }
+                });
+
+                addCaseGSONRequest.setShouldCache(false);
+                Utilities.getRequestQueue(this).add(addCaseGSONRequest);
+            }
+        }else{
+            Utilities.internetConnectionError(AddCaseActivity.this);
         }
-
     }
 }

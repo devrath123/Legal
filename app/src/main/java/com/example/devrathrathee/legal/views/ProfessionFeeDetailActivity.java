@@ -1,18 +1,35 @@
 package com.example.devrathrathee.legal.views;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
+import com.example.devrathrathee.legal.beans.CaseIdBean;
 import com.example.devrathrathee.legal.beans.MatterReceivedBean;
+import com.example.devrathrathee.legal.beans.PaymentStatusBean;
 import com.example.devrathrathee.legal.beans.ProfessionalFeeBean;
+import com.example.devrathrathee.legal.utils.API;
 import com.example.devrathrathee.legal.utils.Constants;
+import com.example.devrathrathee.legal.utils.GSONRequest;
+import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
+import com.example.devrathrathee.legal.utils.Utilities;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +55,10 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
     @BindView(R.id.payment_status_tv)
     TextView payment_status_tv;
 
+    ProgressDialog progressDialog;
+    List<String> paymentStatusList = new ArrayList<>();
+    Map<String, String> paymentStatusMap = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +69,15 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Payment Details");
 
         setPaymentDetails(getPaymentDetails());
+        getPaymentStatus();
     }
 
     private void setPaymentDetails(ProfessionalFeeBean.PaymentDetail paymentDetails) {
@@ -65,8 +90,11 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.edit_payment_details_iv)
-    public void paymentDetailsEdit(View view){
-
+    public void paymentDetailsEdit(View view) {
+        Intent intent = new Intent(ProfessionFeeDetailActivity.this, AddPaymentActivity.class);
+        intent.putExtra(Constants.INTENT_ADD_EDIT_FEE, Constants.INTENT_EDIT_FEE);
+        intent.putExtra(Constants.INTENT_PAYMENT_DETAIL, getPaymentDetails());
+        startActivity(intent);
     }
 
     @Override
@@ -83,5 +111,47 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
             return getIntent().getParcelableExtra(Constants.INTENT_PAYMENT_DETAIL);
         }
         return null;
+    }
+
+    private void getPaymentStatus() {
+
+        Map<String, String> profFeeMap = new HashMap<>();
+        profFeeMap.put("action", "select3");
+        profFeeMap.put("user_type", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_TYPE));
+        profFeeMap.put("lawyer_id", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_ID));
+
+        progressDialog.show();
+        GSONRequest<PaymentStatusBean> profFeeGSONRequest = new GSONRequest<PaymentStatusBean>(Request.Method.POST, API.BASE_URL + API.CASE_PAYMENT, PaymentStatusBean.class, profFeeMap,
+
+                new Response.Listener<PaymentStatusBean>() {
+                    @Override
+                    public void onResponse(PaymentStatusBean response) {
+                        progressDialog.dismiss();
+                        if (response.getClient_status() != null && response.getClient_status().size() > 0) {
+
+                            paymentStatusList.clear();
+                            paymentStatusMap.clear();
+
+                            for (PaymentStatusBean.ClientStatus clientStatus : response.getClient_status()) {
+                                if (!paymentStatusList.contains(clientStatus.getPaymt_status())) {
+                                    paymentStatusList.add(clientStatus.getPaymt_status());
+                                    paymentStatusMap.put(clientStatus.getPaymt_status(), clientStatus.getCase_id());
+                                }
+                            }
+
+                            Log.i("Status : ", "");
+
+                         //   setCaseId(caseNumberList);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+            }
+        });
+
+        profFeeGSONRequest.setShouldCache(false);
+        Utilities.getRequestQueue(this).add(profFeeGSONRequest);
     }
 }

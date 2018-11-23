@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.beans.LoginBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -97,49 +98,54 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginClick(View view) {
 
-        if (emailET.getText().toString().length() > 0 && passwordET.getText().toString().length() > 0) {
 
-            if (!getSelectedUserType(selectedUserType).equals("")) {
-                Map<String, String> map = new HashMap<>();
-                map.put("usertype", getSelectedUserType(selectedUserType));
-                map.put("email", emailET.getText().toString());
-                map.put("password", passwordET.getText().toString());
+        if (Connectivity.isConnected(LoginActivity.this)) {
+            if (emailET.getText().toString().length() > 0 && passwordET.getText().toString().length() > 0) {
 
-                final GSONRequest<LoginBean> leadTypeGsonRequest = new GSONRequest<LoginBean>(
-                        Request.Method.POST,
-                        API.BASE_URL + API.LOGIN,
-                        LoginBean.class, map,
-                        new com.android.volley.Response.Listener<LoginBean>() {
-                            @Override
-                            public void onResponse(LoginBean response) {
-                                if (response.getUser_details() == null) {
-                                    Utilities.showToast(LoginActivity.this, "Invalid credentials");
-                                } else {
-                                    SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.USER_ID, response.getUser_details().get(0).getUser_id());
-                                    if (response.getUser_details().get(0).getFirm_id() != null){
-                                        SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.FIRM_ID, response.getUser_details().get(0).getFirm_id());
-                                        SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.USER_TYPE, response.getUser_details().get(0).getType());
-                                        SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.USER_NAME, response.getUser_details().get(0).getUser_name());
+                if (!getSelectedUserType(selectedUserType).equals("")) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("usertype", getSelectedUserType(selectedUserType));
+                    map.put("email", emailET.getText().toString());
+                    map.put("password", passwordET.getText().toString());
+
+                    final GSONRequest<LoginBean> leadTypeGsonRequest = new GSONRequest<LoginBean>(
+                            Request.Method.POST,
+                            API.BASE_URL + API.LOGIN,
+                            LoginBean.class, map,
+                            new com.android.volley.Response.Listener<LoginBean>() {
+                                @Override
+                                public void onResponse(LoginBean response) {
+                                    if (response.getUser_details() == null) {
+                                        Utilities.showToast(LoginActivity.this, "Invalid credentials");
+                                    } else {
+                                        SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.USER_ID, response.getUser_details().get(0).getUser_id());
+                                        if (response.getUser_details().get(0).getFirm_id() != null) {
+                                            SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.FIRM_ID, response.getUser_details().get(0).getFirm_id());
+                                            SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.USER_TYPE, response.getUser_details().get(0).getType());
+                                            SharedPreferenceManager.getInstance(LoginActivity.this).putString(Constants.USER_NAME, response.getUser_details().get(0).getUser_name());
+                                        }
+                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                        finish();
                                     }
-                                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                    finish();
                                 }
-                            }
-                        },
-                        new com.android.volley.Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Utilities.serverError(LoginActivity.this);
-                            }
-                        });
-                leadTypeGsonRequest.setShouldCache(false);
-                Utilities.getRequestQueue(LoginActivity.this).add(leadTypeGsonRequest);
-            } else {
-                Utilities.showToast(LoginActivity.this, "Select UserType");
-            }
+                            },
+                            new com.android.volley.Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Utilities.serverError(LoginActivity.this);
+                                }
+                            });
+                    leadTypeGsonRequest.setShouldCache(false);
+                    Utilities.getRequestQueue(LoginActivity.this).add(leadTypeGsonRequest);
+                } else {
+                    Utilities.showToast(LoginActivity.this, "Select UserType");
+                }
 
-        } else {
-            Utilities.showToast(LoginActivity.this, "Enter both Email address & password");
+            } else {
+                Utilities.showToast(LoginActivity.this, "Enter both Email address & password");
+            }
+        }else{
+            Utilities.internetConnectionError(LoginActivity.this);
         }
     }
 }

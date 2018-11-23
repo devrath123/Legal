@@ -1,6 +1,7 @@
 package com.example.devrathrathee.legal.views;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -17,6 +19,7 @@ import com.example.devrathrathee.legal.adapters.ProfessionalFeeAdapter;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.beans.ProfessionalFeeBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -41,6 +44,14 @@ public class ProfessionalFeeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FloatingActionButton fab = findViewById(R.id.add_payment_button_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfessionalFeeActivity.this, AddPaymentActivity.class));
+            }
+        });
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
 
@@ -53,7 +64,12 @@ public class ProfessionalFeeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getPaymentDetails();
+
+        if (Connectivity.isConnected(ProfessionalFeeActivity.this)) {
+            getPaymentDetails();
+        } else {
+            Utilities.internetConnectionError(ProfessionalFeeActivity.this);
+        }
     }
 
     @Override

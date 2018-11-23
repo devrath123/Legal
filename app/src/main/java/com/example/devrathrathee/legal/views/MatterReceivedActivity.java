@@ -17,6 +17,7 @@ import com.example.devrathrathee.legal.adapters.MatterReceivedAdapter;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.beans.MatterReceivedBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -48,7 +49,11 @@ public class MatterReceivedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Matter Received");
 
-        getMatterReceived();
+        if (Connectivity.isConnected(MatterReceivedActivity.this)) {
+            getMatterReceived();
+        } else {
+            Utilities.internetConnectionError(MatterReceivedActivity.this);
+        }
     }
 
     @Override
@@ -74,7 +79,7 @@ public class MatterReceivedActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(MatterReceivedBean response) {
                         progressDialog.dismiss();
-                        if (response.getLawyer_matter_rec().size() > 0) {
+                        if (response.getLawyer_matter_rec() != null && response.getLawyer_matter_rec().size() > 0) {
                             setMessageReceived(response.getLawyer_matter_rec());
                         }
                     }

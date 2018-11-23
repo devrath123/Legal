@@ -17,6 +17,7 @@ import com.example.devrathrathee.legal.adapters.CounselDeskAdapter;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.beans.CounselDeskBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -48,7 +49,11 @@ public class CounselDeskActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Cases Diary");
 
-        getCounselInfo();
+        if (Connectivity.isConnected(CounselDeskActivity.this)) {
+            getCounselInfo();
+        } else {
+            Utilities.internetConnectionError(CounselDeskActivity.this);
+        }
 
     }
 

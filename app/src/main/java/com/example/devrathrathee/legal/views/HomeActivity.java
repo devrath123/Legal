@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity
         casesViewPager.setAdapter(casesPagerAdapter);
         tabLayout.setupWithViewPager(casesViewPager);
 
-        reduceMarginsInTabs(tabLayout,30);
+        reduceMarginsInTabs(tabLayout, 30);
 
     }
 
@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity
                 navigationView.getMenu().setGroupVisible(R.id.main_option, false);
                 break;
 
-            case R.id.nav_upcoming_cases :
+            case R.id.nav_upcoming_cases:
                 drawer.closeDrawer(GravityCompat.START);
                 break;
 
@@ -142,12 +142,12 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(new Intent(HomeActivity.this, ProfessionalFeeActivity.class));
                 break;
 
-            case R.id.nav_option_cases :
+            case R.id.nav_option_cases:
                 navigationView.getMenu().setGroupVisible(R.id.cases_options, false);
                 navigationView.getMenu().setGroupVisible(R.id.main_option, true);
                 break;
 
-            case R.id.nav_lawyer_support_desk :
+            case R.id.nav_lawyer_support_desk:
                 navigationView.getMenu().setGroupVisible(R.id.main_option, false);
                 navigationView.getMenu().setGroupVisible(R.id.lawyer_support_options, true);
                 break;
@@ -157,24 +157,29 @@ public class HomeActivity extends AppCompatActivity
                 navigationView.getMenu().setGroupVisible(R.id.lawyer_support_options, false);
                 break;
 
-            case R.id.nav_matter_received :
+            case R.id.nav_matter_received:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, MatterReceivedActivity.class));
                 break;
 
-            case R.id.nav_matter_sent :
+            case R.id.nav_matter_sent:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, MatterSentActivity.class));
                 break;
 
-            case R.id.nav_password_reset :
+            case R.id.nav_password_reset:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, PasswordResetActivity.class));
                 break;
 
-            case R.id.nav_counsel_desk :
+            case R.id.nav_counsel_desk:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, CounselDeskActivity.class));
+                break;
+
+            case R.id.nav_post_jobs:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, JobsListActivity.class));
                 break;
 
             case R.id.nav_legal_queries:
@@ -182,12 +187,12 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(new Intent(HomeActivity.this, LegalQueriesActivity.class));
                 break;
 
-            case R.id.nav_account_details :
+            case R.id.nav_account_details:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, AccountDetailsActivity.class));
                 break;
 
-            case R.id.nav_logout :
+            case R.id.nav_logout:
                 SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.FIRM_ID, "");
                 SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.USER_TYPE, "");
                 SharedPreferenceManager.getInstance(HomeActivity.this).putString(Constants.USER_NAME, "");

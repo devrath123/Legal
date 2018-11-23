@@ -18,6 +18,7 @@ import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.adapters.CasesAdapter;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -66,7 +67,12 @@ public class TodayCasesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getTodayCases();
+        if (Connectivity.isConnected(getActivity())) {
+            getTodayCases();
+        }else{
+            Utilities.internetConnectionError(getActivity());
+        }
+
     }
 
     private void getTodayCases() {

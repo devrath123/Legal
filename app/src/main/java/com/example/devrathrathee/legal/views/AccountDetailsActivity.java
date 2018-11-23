@@ -18,6 +18,7 @@ import com.example.devrathrathee.legal.beans.AccountDetailBean;
 import com.example.devrathrathee.legal.beans.PracticeAreaBean;
 import com.example.devrathrathee.legal.beans.RegistrationBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.RobotoBoldTextView;
@@ -99,8 +100,12 @@ public class AccountDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Account Details");
 
-        practiceArea();
-        accountDetails();
+        if (Connectivity.isConnected(AccountDetailsActivity.this)) {
+            practiceArea();
+            accountDetails();
+        } else {
+            Utilities.internetConnectionError(AccountDetailsActivity.this);
+        }
     }
 
     @Override

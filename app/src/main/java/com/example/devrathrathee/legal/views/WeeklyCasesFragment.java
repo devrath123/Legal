@@ -18,6 +18,7 @@ import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.adapters.CasesAdapter;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -66,8 +67,11 @@ public class WeeklyCasesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        getWeeklyCases();
+        if (Connectivity.isConnected(getActivity())) {
+            getWeeklyCases();
+        }else{
+            Utilities.internetConnectionError(getActivity());
+        }
     }
 
     private void getWeeklyCases() {

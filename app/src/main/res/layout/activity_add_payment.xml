@@ -44,6 +44,7 @@
                     android:orientation="vertical">
 
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:id="@+id/case_number_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -139,7 +140,7 @@
                         android:textSize="@dimen/edit_text_size" />
 
                     <Button
-                        android:id="@+id/add_case_button"
+                        android:id="@+id/add_payment_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"

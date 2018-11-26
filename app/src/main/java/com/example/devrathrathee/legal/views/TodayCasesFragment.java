@@ -24,6 +24,7 @@ import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
 import com.example.devrathrathee.legal.utils.Utilities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +90,8 @@ public class TodayCasesFragment extends Fragment {
                         progressDialog.dismiss();
                         if (response.getCases_today() != null) {
                             setAdapter(response.getCases_today());
+                        }else{
+                            setAdapter(new ArrayList<CaseBean.CasesToday>());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -107,6 +110,7 @@ public class TodayCasesFragment extends Fragment {
         todayCasesRV.setAdapter(casesAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         todayCasesRV.setLayoutManager(mLayoutManager);
+        casesAdapter.notifyDataSetChanged();
     }
 
 }

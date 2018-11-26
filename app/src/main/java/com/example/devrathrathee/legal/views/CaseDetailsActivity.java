@@ -1,6 +1,10 @@
 package com.example.devrathrathee.legal.views;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +13,18 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.beans.CaseBean;
+import com.example.devrathrathee.legal.beans.RegistrationBean;
+import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
+import com.example.devrathrathee.legal.utils.GSONRequest;
+import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
+import com.example.devrathrathee.legal.utils.Utilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,12 +65,17 @@ public class CaseDetailsActivity extends AppCompatActivity {
     @BindView(R.id.category_tv)
     TextView category_tv;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_case_details);
 
         ButterKnife.bind(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,6 +93,64 @@ public class CaseDetailsActivity extends AppCompatActivity {
         intent.putExtra(Constants.INTENT_ADD_EDIT_CASE, Constants.INTENT_EDIT_CASE);
         intent.putExtra(Constants.INTENT_CASE, getCaseBean());
         startActivity(intent);
+    }
+
+    @OnClick(R.id.send_case_details_iv)
+    public void sendCaseDetailsClick(View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(CaseDetailsActivity.this);
+
+        builder.setTitle("Send To ?")
+                .setPositiveButton("Lawyer", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNegativeButton("Counseller", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+
+    }
+
+    @OnClick(R.id.delete_case_details_iv)
+    public void deleteCaseDetailsClick(View view) {
+
+        if (Connectivity.isConnected(CaseDetailsActivity.this)) {
+            progressDialog.show();
+            String url;
+
+            url = API.BASE_URL + API.CASES_ALL + "?action=delete&case_id=" + getCaseBean().getCase_id() + "&user_type=" + SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_TYPE)  +
+                    "&lawyer_id=" + SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_ID);
+
+            GSONRequest<RegistrationBean> deleteCaseGSONRequest = new GSONRequest<>(Request.Method.POST, url, RegistrationBean.class, null,
+
+                    new Response.Listener<RegistrationBean>() {
+                        @Override
+                        public void onResponse(RegistrationBean response) {
+                            progressDialog.dismiss();
+                            Utilities.showToast(CaseDetailsActivity.this, "Case deleted");
+                            finish();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressDialog.dismiss();
+                    Utilities.serverError(CaseDetailsActivity.this);
+                }
+            });
+
+            deleteCaseGSONRequest.setShouldCache(false);
+            Utilities.getRequestQueue(this).add(deleteCaseGSONRequest);
+
+        } else {
+            Utilities.internetConnectionError(CaseDetailsActivity.this);
+        }
+
     }
 
     @Override

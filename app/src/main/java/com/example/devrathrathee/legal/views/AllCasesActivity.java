@@ -24,6 +24,7 @@ import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
 import com.example.devrathrathee.legal.utils.Utilities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +95,8 @@ public class AllCasesActivity extends AppCompatActivity {
                            progressDialog.dismiss();
                         if (response.getCase_all() != null) {
                             setAdapter(response.getCase_all());
+                        }else{
+                            setAdapter(new ArrayList<CaseBean.CasesToday>());
                         }
                     }
                 }, new Response.ErrorListener() {

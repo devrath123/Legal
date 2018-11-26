@@ -24,6 +24,7 @@ import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
 import com.example.devrathrathee.legal.utils.Utilities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +90,8 @@ public class WeeklyCasesFragment extends Fragment {
                         progressDialog.dismiss();
                         if (response.getCases_weekly() != null) {
                             setAdapter(response.getCases_weekly());
+                        }else{
+                            setAdapter(new ArrayList<CaseBean.CasesToday>());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -107,5 +110,6 @@ public class WeeklyCasesFragment extends Fragment {
         recyclerView.setAdapter(casesAdapter);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
+        casesAdapter.notifyDataSetChanged();
     }
 }

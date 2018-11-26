@@ -28,7 +28,7 @@ public class MatterReceivedBean {
 
     public static class MatterReceived implements Parcelable{
         String lawyer_case_id, name, phone, email, court_name, court_number, judge_name, client_name,
-                parties, stage, next_date, counsel_name;
+                parties, stage, next_date, counsel_name, firm_name, lawyer_case_status;
 
         protected MatterReceived(Parcel in) {
             lawyer_case_id = in.readString();
@@ -43,6 +43,8 @@ public class MatterReceivedBean {
             stage = in.readString();
             next_date = in.readString();
             counsel_name = in.readString();
+            firm_name = in.readString();
+            lawyer_case_status = in.readString();
         }
 
         public static final Creator<MatterReceived> CREATOR = new Creator<MatterReceived>() {
@@ -56,6 +58,22 @@ public class MatterReceivedBean {
                 return new MatterReceived[size];
             }
         };
+
+        public String getLawyer_case_status() {
+            return lawyer_case_status;
+        }
+
+        public void setLawyer_case_status(String lawyer_case_status) {
+            this.lawyer_case_status = lawyer_case_status;
+        }
+
+        public String getFirm_name() {
+            return firm_name;
+        }
+
+        public void setFirm_name(String firm_name) {
+            this.firm_name = firm_name;
+        }
 
         public String getLawyer_case_id() {
             return lawyer_case_id;
@@ -172,6 +190,8 @@ public class MatterReceivedBean {
             parcel.writeString(stage);
             parcel.writeString(next_date);
             parcel.writeString(counsel_name);
+            parcel.writeString(firm_name);
+            parcel.writeString(lawyer_case_status);
         }
     }
 }

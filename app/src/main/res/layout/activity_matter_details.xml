@@ -50,6 +50,7 @@
                     android:layout_marginTop="15dp">
 
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:id="@+id/lawyer_label"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
@@ -59,6 +60,52 @@
 
                     <com.example.devrathrathee.legal.utils.RobotoLightTextView
                         android:id="@+id/lawyer_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Lawyer \nPhone"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
+                        android:id="@+id/lawyer_phone_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Lawyer \nEmail"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
+                        android:id="@+id/lawyer_email_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
@@ -83,6 +130,29 @@
 
                     <com.example.devrathrathee.legal.utils.RobotoLightTextView
                         android:id="@+id/court_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Court Number"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
+                        android:id="@+id/court_no_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
@@ -204,6 +274,60 @@
                         android:layout_weight="7"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/status_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Status"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
+                        android:id="@+id/status_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/accept_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/accept_button"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:background="@android:color/black"
+                        android:text="Accept"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/reject_button"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/black"
+                        android:text="Reject"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white" />
 
                 </LinearLayout>
 

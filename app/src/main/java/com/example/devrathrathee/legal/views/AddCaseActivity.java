@@ -100,15 +100,6 @@ public class AddCaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT_CASE)) {
-            getSupportActionBar().setTitle("Update Case");
-            addCaseButton.setText("Update");
-            setCaseDetails(getCaseDetails());
-        } else {
-            getSupportActionBar().setTitle("Add Case");
-            addCaseButton.setText("Add");
-        }
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
 
@@ -169,6 +160,15 @@ public class AddCaseActivity extends AppCompatActivity {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+        if (getAddEditIntent() != null && getAddEditIntent().equals(Constants.INTENT_EDIT_CASE)) {
+            getSupportActionBar().setTitle("Update Case");
+            addCaseButton.setText("Update");
+            setCaseDetails(getCaseDetails());
+        } else {
+            getSupportActionBar().setTitle("Add Case");
+            addCaseButton.setText("Add");
+        }
     }
 
     private void setCaseDetails(CaseBean.CasesToday caseDetails) {
@@ -181,14 +181,61 @@ public class AddCaseActivity extends AppCompatActivity {
         clientPhoneEt.setText(caseDetails.getClient_phone());
         partyAEt.setText(caseDetails.getParty_a());
         partyBEt.setText(caseDetails.getParty_b());
+        categorySpinner.setSelection(getSelectedCategory(caseDetails.getCategory()));
+        stageSpinner.setSelection(getSelectedStage(caseDetails.getStage()));
+    }
+
+    private int getSelectedCategory(String category) {
+        if (category.equals("Civil")) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     private CaseBean.CasesToday getCaseDetails() {
         if (getIntent() != null && getIntent().getParcelableExtra(Constants.INTENT_CASE) != null) {
             return getIntent().getParcelableExtra(Constants.INTENT_CASE);
         }
-
         return null;
+    }
+
+    private int getSelectedStage(String stage) {
+        if (stage.equals("Admission")) {
+            return 0;
+        } else if (stage.equals("Service")) {
+            return 1;
+        } else if (stage.equals("Not-Heard")) {
+            return 2;
+        } else if (stage.equals("Hearing")) {
+            return 3;
+        } else if (stage.equals("Evidence")) {
+            return 4;
+        } else if (stage.equals("Part-Heard")) {
+            return 5;
+        } else if (stage.equals("Cross")) {
+            return 6;
+        } else if (stage.equals("Arguments")) {
+            return 7;
+        } else if (stage.equals("Reply")) {
+            return 8;
+        } else if (stage.equals("Dismissal")) {
+            return 9;
+        } else if (stage.equals("Bail")) {
+            return 10;
+        } else if (stage.equals("Anticipatory-Bail")) {
+            return 11;
+        } else if (stage.equals("Interim")) {
+            return 12;
+        } else if (stage.equals("Add-Interim")) {
+            return 13;
+        } else if (stage.equals("Defence-Witness")) {
+            return 14;
+        } else if (stage.equals("Prosecution-Witness")) {
+            return 15;
+        }
+
+        return 0;
     }
 
     private String getAddEditIntent() {
@@ -288,7 +335,7 @@ public class AddCaseActivity extends AppCompatActivity {
                 addCaseGSONRequest.setShouldCache(false);
                 Utilities.getRequestQueue(this).add(addCaseGSONRequest);
             }
-        }else{
+        } else {
             Utilities.internetConnectionError(AddCaseActivity.this);
         }
     }

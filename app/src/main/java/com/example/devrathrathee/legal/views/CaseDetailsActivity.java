@@ -22,6 +22,9 @@ public class CaseDetailsActivity extends AppCompatActivity {
     @BindView(R.id.court_tv)
     TextView court_tv;
 
+    @BindView(R.id.court_number_tv)
+    TextView court_number_tv;
+
     @BindView(R.id.judge_tv)
     TextView judge_tv;
 
@@ -101,5 +104,6 @@ public class CaseDetailsActivity extends AppCompatActivity {
         client_tv.setText(caseBean.getClient_name());
         client_phone_tv.setText(caseBean.getClient_phone());
         category_tv.setText(caseBean.getCategory());
+        court_number_tv.setText(caseBean.getCase_number());
     }
 }

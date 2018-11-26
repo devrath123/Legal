@@ -52,6 +52,7 @@ public class MatterSentAdapter extends RecyclerView.Adapter<MatterSentAdapter.Ma
                 int position =  (Integer) matterReceivedViewHolder.cardRelativeLayout.getTag();
                 Intent intent = new Intent(context, MatterDetailsActivity.class);
                 intent.putExtra(Constants.INTENT_MATTER,matterReceivedList.get(position));
+                intent.putExtra(Constants.INTENT_MATTER_TYPE, Constants.INTENT_MATTER_SENT);
                 context.startActivity(intent);
             }
         });

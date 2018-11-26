@@ -19,6 +19,11 @@ public interface Constants {
 
     String INTENT_ADD_EDIT_CASE = "AddEditCase";
     String INTENT_EDIT_CASE = "EditCase";
+
     String INTENT_ADD_EDIT_FEE = "AddEditFee";
     String INTENT_EDIT_FEE = "EditFee";
+
+    String INTENT_MATTER_TYPE = "MatterType";
+    String INTENT_MATTER_RECEIVED = "MatterReceived";
+    String INTENT_MATTER_SENT = "MatterSent";
 }

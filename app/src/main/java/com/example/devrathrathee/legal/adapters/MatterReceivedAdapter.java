@@ -52,6 +52,7 @@ public class MatterReceivedAdapter extends RecyclerView.Adapter<MatterReceivedAd
                 int position =  (Integer) matterReceivedViewHolder.cardRelativeLayout.getTag();
                 Intent intent = new Intent(context, MatterDetailsActivity.class);
                 intent.putExtra(Constants.INTENT_MATTER,matterReceivedList.get(position));
+                intent.putExtra(Constants.INTENT_MATTER_TYPE, Constants.INTENT_MATTER_RECEIVED);
                 context.startActivity(intent);
             }
         });

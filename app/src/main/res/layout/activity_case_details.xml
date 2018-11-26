@@ -82,6 +82,29 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:text="Court Number"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
+                        android:id="@+id/court_number_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
                         android:text="Judge"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />

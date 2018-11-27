@@ -50,6 +50,12 @@ public class AccountDetailsActivity extends AppCompatActivity {
     @BindView(R.id.address_et)
     EditText address_et;
 
+    @BindView(R.id.address2_et)
+    EditText address2_et;
+
+    @BindView(R.id.address3_et)
+    EditText address3_et;
+
     @BindView(R.id.about_us_et)
     EditText about_us_et;
 
@@ -62,9 +68,13 @@ public class AccountDetailsActivity extends AppCompatActivity {
     @BindView(R.id.practise_areas_spinner)
     Spinner practise_areas_spinner;
 
+    @BindView(R.id.enrollment_no_et)
+    EditText enrollment_no_et;
+
     String[] languagesArray = new String[]{"English", "Marathi", "Hindi", "Gujarati"};
     ArrayAdapter<String> practiseAreaArrayAdapter;
     List<String> practiseList = new ArrayList<>();
+    String selectedLanguage, selectedPractiseArea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +94,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // selectedUserType = (String) parent.getSelectedItem();
+                selectedLanguage = (String) parent.getSelectedItem();
             }
 
             @Override
@@ -190,7 +200,7 @@ public class AccountDetailsActivity extends AppCompatActivity {
         practise_areas_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // selectedUserType = (String) parent.getSelectedItem();
+                selectedPractiseArea = (String) parent.getSelectedItem();
             }
 
             @Override
@@ -208,5 +218,23 @@ public class AccountDetailsActivity extends AppCompatActivity {
         address_et.setText(accountDetails.getAddress());
         practise_courts_et.setText(accountDetails.getPractice_courts());
         about_us_et.setText(accountDetails.getAbout_us());
+        address2_et.setText(accountDetails.getAddress2());
+        address3_et.setText(accountDetails.getAddress3());
+        setSelectedLanguage(accountDetails.getLanguages());
+    }
+
+    private void setSelectedLanguage(String language) {
+        if (language.contains("English")) {
+            languageSpinner.setSelection(0);
+        }
+        if (language.contains("Marathi")) {
+            languageSpinner.setSelection(1);
+        }
+        if (language.contains("Hindi")) {
+            languageSpinner.setSelection(2);
+        }
+        if (language.contains("Gujarati")){
+            languageSpinner.setSelection(3);
+        }
     }
 }

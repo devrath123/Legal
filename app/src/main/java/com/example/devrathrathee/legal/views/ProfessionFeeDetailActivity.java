@@ -18,7 +18,9 @@ import com.example.devrathrathee.legal.beans.CaseIdBean;
 import com.example.devrathrathee.legal.beans.MatterReceivedBean;
 import com.example.devrathrathee.legal.beans.PaymentStatusBean;
 import com.example.devrathrathee.legal.beans.ProfessionalFeeBean;
+import com.example.devrathrathee.legal.beans.RegistrationBean;
 import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
 import com.example.devrathrathee.legal.utils.GSONRequest;
 import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
@@ -77,7 +79,28 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Payment Details");
 
         setPaymentDetails(getPaymentDetails());
-        getPaymentStatus();
+
+        if (Connectivity.isConnected(ProfessionFeeDetailActivity.this)) {
+            getPaymentStatus();
+        } else {
+            Utilities.internetConnectionError(ProfessionFeeDetailActivity.this);
+        }
+
+        payment_status_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Connectivity.isConnected(ProfessionFeeDetailActivity.this)) {
+                    if (getPaymentDetails().getPaymt_status().equals("Pending")) {
+                        updatePaymentStatus("Paid");
+                    } else if (getPaymentDetails().getPaymt_status().equals("Paid")) {
+                        updatePaymentStatus("Pending");
+                    }
+                } else {
+                    Utilities.internetConnectionError(ProfessionFeeDetailActivity.this);
+                }
+            }
+        });
     }
 
     private void setPaymentDetails(ProfessionalFeeBean.PaymentDetail paymentDetails) {
@@ -113,6 +136,35 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
         return null;
     }
 
+    private void updatePaymentStatus(final String status) {
+        Map<String, String> profFeeMap = new HashMap<>();
+        profFeeMap.put("action", "update2");
+        profFeeMap.put("user_type", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_TYPE));
+        profFeeMap.put("lawyer_id", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_ID));
+        profFeeMap.put("case_id", getPaymentDetails().getCase_id());
+        profFeeMap.put("paymt_status", status);
+
+        progressDialog.show();
+        GSONRequest<RegistrationBean> profFeeGSONRequest = new GSONRequest<RegistrationBean>(Request.Method.POST, API.BASE_URL + API.CASE_PAYMENT, RegistrationBean.class, profFeeMap,
+
+                new Response.Listener<RegistrationBean>() {
+                    @Override
+                    public void onResponse(RegistrationBean response) {
+                        progressDialog.dismiss();
+                        getPaymentDetails().setPaymt_status(status);
+                        payment_status_tv.setText(status);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+            }
+        });
+
+        profFeeGSONRequest.setShouldCache(false);
+        Utilities.getRequestQueue(this).add(profFeeGSONRequest);
+    }
+
     private void getPaymentStatus() {
 
         Map<String, String> profFeeMap = new HashMap<>();
@@ -138,10 +190,6 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
                                     paymentStatusMap.put(clientStatus.getPaymt_status(), clientStatus.getCase_id());
                                 }
                             }
-
-                            Log.i("Status : ", "");
-
-                         //   setCaseId(caseNumberList);
                         }
                     }
                 }, new Response.ErrorListener() {

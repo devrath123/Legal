@@ -1,5 +1,6 @@
 package com.example.devrathrathee.legal.views;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,12 +30,15 @@ import java.util.Map;
 public class LegalQueriesActivity extends AppCompatActivity {
 
     RecyclerView legal_queries_rv;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_legal_queries);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
 
         legal_queries_rv = findViewById(R.id.legal_queries_rv);
 
@@ -45,17 +49,20 @@ public class LegalQueriesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Manage Queries");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         if (Connectivity.isConnected(LegalQueriesActivity.this)) {
             getLegalQueries();
-        }else{
+        } else {
             Utilities.internetConnectionError(LegalQueriesActivity.this);
         }
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
@@ -69,13 +76,14 @@ public class LegalQueriesActivity extends AppCompatActivity {
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(LegalQueriesActivity.this).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(LegalQueriesActivity.this).getString(Constants.USER_ID));
 
-        // progressDialog.show();
+        progressDialog.show();
         GSONRequest<LegalQueryBean> casesTodayBeanGSONRequest = new GSONRequest<>(Request.Method.POST, API.BASE_URL + API.LEGAL_QUERIES, LegalQueryBean.class, todayCasesMap,
 
                 new Response.Listener<LegalQueryBean>() {
                     @Override
                     public void onResponse(LegalQueryBean response) {
 
+                        progressDialog.dismiss();
                         if (response.getLawyer_matter_rec() != null) {
                             setAdapter(response.getLawyer_matter_rec());
                         }
@@ -83,7 +91,7 @@ public class LegalQueriesActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //   progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
 

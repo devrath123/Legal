@@ -1,5 +1,6 @@
 package com.example.devrathrathee.legal.views;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +10,18 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
 import com.example.devrathrathee.legal.beans.MatterReceivedBean;
+import com.example.devrathrathee.legal.beans.RegistrationBean;
+import com.example.devrathrathee.legal.utils.API;
+import com.example.devrathrathee.legal.utils.Connectivity;
 import com.example.devrathrathee.legal.utils.Constants;
+import com.example.devrathrathee.legal.utils.GSONRequest;
+import com.example.devrathrathee.legal.utils.SharedPreferenceManager;
+import com.example.devrathrathee.legal.utils.Utilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,12 +76,17 @@ public class MatterDetailsActivity extends AppCompatActivity {
     @BindView(R.id.reject_button)
     Button reject_button;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matter_details);
 
         ButterKnife.bind(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,18 +100,54 @@ public class MatterDetailsActivity extends AppCompatActivity {
         accept_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (Connectivity.isConnected(MatterDetailsActivity.this)) {
+                    updateStatus("Accepted");
+                } else {
+                    Utilities.internetConnectionError(MatterDetailsActivity.this);
+                }
             }
         });
 
         reject_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (Connectivity.isConnected(MatterDetailsActivity.this)) {
+                    updateStatus("Not Available");
+                } else {
+                    Utilities.internetConnectionError(MatterDetailsActivity.this);
+                }
             }
         });
 
     }
+
+    private void updateStatus(String status) {
+
+        String url = API.BASE_URL + API.MATTER_RECEIVED + "?action=update&user_type=" + SharedPreferenceManager.getInstance(MatterDetailsActivity.this).getString(Constants.USER_TYPE) +
+                "&lawyer_id=" + SharedPreferenceManager.getInstance(MatterDetailsActivity.this).getString(Constants.USER_ID) + "&filter[lc_status]=" + status +
+                "&lawyer_case_id=" + getMatter().getLawyer_case_id();
+
+        progressDialog.show();
+        GSONRequest<RegistrationBean> matterStatusGSONRequest = new GSONRequest<RegistrationBean>(Request.Method.GET, url, RegistrationBean.class, null,
+
+                new Response.Listener<RegistrationBean>() {
+                    @Override
+                    public void onResponse(RegistrationBean response) {
+                        progressDialog.dismiss();
+                        Utilities.showToast(MatterDetailsActivity.this, "Status updated");
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+            }
+        });
+
+        matterStatusGSONRequest.setShouldCache(false);
+        Utilities.getRequestQueue(this).add(matterStatusGSONRequest);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -133,16 +184,22 @@ public class MatterDetailsActivity extends AppCompatActivity {
         court_no_tv.setText(matterReceived.getCourt_number());
         judge_tv.setText(matterReceived.getJudge_name());
 
-        if (getMatterType() != null && getMatterType().equals(Constants.INTENT_MATTER_SENT)){
+        if (getMatterType() != null && getMatterType().equals(Constants.INTENT_MATTER_SENT)) {
             lawyer_label.setText("Sent To");
             status_tv.setText(matterReceived.getLawyer_case_status());
             accept_ll.setVisibility(View.GONE);
             status_ll.setVisibility(View.VISIBLE);
             lawyer_tv.setText(matterReceived.getFirm_name());
-        }else{
-            accept_ll.setVisibility(View.VISIBLE);
-            status_ll.setVisibility(View.GONE);
+        } else {
             lawyer_tv.setText(matterReceived.getName());
+
+            if (matterReceived.getStatus() != null && matterReceived.getStatus().equals("Accepted")) {
+                accept_ll.setVisibility(View.GONE);
+                status_tv.setText(matterReceived.getStatus());
+            } else {
+                status_ll.setVisibility(View.GONE);
+                accept_ll.setVisibility(View.VISIBLE);
+            }
         }
 
     }

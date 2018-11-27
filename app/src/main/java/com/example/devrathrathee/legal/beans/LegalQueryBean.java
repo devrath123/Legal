@@ -18,7 +18,7 @@ public class LegalQueryBean {
     }
 
     public static class ManageQueryBean implements Parcelable{
-        String date, cust_name, cust_phone, cust_email, quote_type, cust_query, quote_status, quote_id;
+        String date, cust_name, cust_phone, cust_email, quote_type, cust_query, quote_status, quote_id, lawyer_name;
 
         protected ManageQueryBean(Parcel in) {
             date = in.readString();
@@ -29,6 +29,7 @@ public class LegalQueryBean {
             cust_query = in.readString();
             quote_status = in.readString();
             quote_id = in.readString();
+            lawyer_name = in.readString();
         }
 
         public static final Creator<ManageQueryBean> CREATOR = new Creator<ManageQueryBean>() {
@@ -42,6 +43,14 @@ public class LegalQueryBean {
                 return new ManageQueryBean[size];
             }
         };
+
+        public String getLawyer_name() {
+            return lawyer_name;
+        }
+
+        public void setLawyer_name(String lawyer_name) {
+            this.lawyer_name = lawyer_name;
+        }
 
         public String getDate() {
             return date;
@@ -122,6 +131,7 @@ public class LegalQueryBean {
             parcel.writeString(cust_query);
             parcel.writeString(quote_status);
             parcel.writeString(quote_id);
+            parcel.writeString(lawyer_name);
         }
     }
 }

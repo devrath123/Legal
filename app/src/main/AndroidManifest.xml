@@ -48,7 +48,8 @@
         <activity android:name=".views.ProfessionalFeeActivity" />
         <activity android:name=".views.ProfessionFeeDetailActivity" />
         <activity android:name=".views.AddPaymentActivity" />
-        <activity android:name=".views.JobsListActivity"></activity>
+        <activity android:name=".views.JobsListActivity" />
+        <activity android:name=".views.SearchLawyerActivity"></activity>
     </application>
 
 </manifest>

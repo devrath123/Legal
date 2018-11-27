@@ -44,6 +44,11 @@ public class MatterSentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Matter Sent");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         if (Connectivity.isConnected(MatterSentActivity.this)) {
             getMatterSent();

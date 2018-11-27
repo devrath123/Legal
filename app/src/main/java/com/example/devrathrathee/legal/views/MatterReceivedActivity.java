@@ -48,6 +48,11 @@ public class MatterReceivedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Matter Received");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         if (Connectivity.isConnected(MatterReceivedActivity.this)) {
             getMatterReceived();

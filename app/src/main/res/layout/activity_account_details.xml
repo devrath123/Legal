@@ -142,6 +142,54 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
+                        android:text="Address 2"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/address2_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/edit_text_size" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Address 3"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/address3_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/edit_text_size" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Enrollment No"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/enrollment_no_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_minus_5"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/edit_text_size" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:text="About Us"
                         android:textColor="@android:color/black" />
 

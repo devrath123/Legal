@@ -35,6 +35,16 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/black" />
 
+            <ImageView
+                android:id="@+id/delete_case_details_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/delete_icon_32"
+                android:padding="5dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +60,30 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Customer"
+                        android:text="Lawyer"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                    <com.example.devrathrathee.legal.utils.RobotoLightTextView
+                        android:id="@+id/lawyer_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/dimen_15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <com.example.devrathrathee.legal.utils.RobotoBoldTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Name"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 

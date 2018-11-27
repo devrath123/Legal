@@ -103,7 +103,9 @@ public class CaseDetailsActivity extends AppCompatActivity {
         builder.setTitle("Send To ?")
                 .setPositiveButton("Lawyer", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Intent intent = new Intent(CaseDetailsActivity.this, SearchLawyerActivity.class);
+                        intent.putExtra(Constants.INTENT_CASE_ID, getCaseBean().getCase_id());
+                        CaseDetailsActivity.this.startActivity(intent);
                     }
                 })
                 .setNegativeButton("Counseller", new DialogInterface.OnClickListener() {
@@ -124,7 +126,7 @@ public class CaseDetailsActivity extends AppCompatActivity {
             progressDialog.show();
             String url;
 
-            url = API.BASE_URL + API.CASES_ALL + "?action=delete&case_id=" + getCaseBean().getCase_id() + "&user_type=" + SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_TYPE)  +
+            url = API.BASE_URL + API.CASES_ALL + "?action=delete&case_id=" + getCaseBean().getCase_id() + "&user_type=" + SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_TYPE) +
                     "&lawyer_id=" + SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_ID);
 
             GSONRequest<RegistrationBean> deleteCaseGSONRequest = new GSONRequest<>(Request.Method.POST, url, RegistrationBean.class, null,

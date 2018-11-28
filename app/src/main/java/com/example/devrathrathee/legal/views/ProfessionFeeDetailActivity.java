@@ -92,9 +92,9 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
 
                 if (Connectivity.isConnected(ProfessionFeeDetailActivity.this)) {
                     if (getPaymentDetails().getPaymt_status().equals("Pending")) {
-                        updatePaymentStatus("Paid");
-                    } else if (getPaymentDetails().getPaymt_status().equals("Paid")) {
                         updatePaymentStatus("Pending");
+                    } else if (getPaymentDetails().getPaymt_status().equals("Paid")) {
+                        updatePaymentStatus("Paid");
                     }
                 } else {
                     Utilities.internetConnectionError(ProfessionFeeDetailActivity.this);
@@ -152,7 +152,11 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
                     public void onResponse(RegistrationBean response) {
                         progressDialog.dismiss();
                         getPaymentDetails().setPaymt_status(status);
-                        payment_status_tv.setText(status);
+                        if (status.equals("Pending")) {
+                            payment_status_tv.setText("Paid");
+                        }else{
+                            payment_status_tv.setText("Pending");
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override

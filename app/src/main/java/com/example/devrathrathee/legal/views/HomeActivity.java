@@ -137,6 +137,11 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(new Intent(HomeActivity.this, AllCasesActivity.class));
                 break;
 
+            case R.id.nav_calendar:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, CalendarActivity.class));
+                break;
+
             case R.id.nav_professional_fees:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, ProfessionalFeeActivity.class));

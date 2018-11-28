@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,11 +43,11 @@ public class SearchLawyerAdapter extends RecyclerView.Adapter<SearchLawyerAdapte
         searchLawyerViewHolder.phone_tv.setText(lawyerAccountDetail.getPhone());
         searchLawyerViewHolder.email_tv.setText(lawyerAccountDetail.getEmail());
 
-        searchLawyerViewHolder.card_relative_layout.setTag(i);
-        searchLawyerViewHolder.card_relative_layout.setOnClickListener(new View.OnClickListener() {
+        searchLawyerViewHolder.send_iv.setTag(i);
+        searchLawyerViewHolder.send_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = (Integer) searchLawyerViewHolder.card_relative_layout.getTag();
+                int position = (Integer) searchLawyerViewHolder.send_iv.getTag();
                 ((SearchLawyerActivity) context).transferCase(lawyerDetailList.get(position).getSend_lawyer_id());
             }
         });
@@ -61,6 +62,7 @@ public class SearchLawyerAdapter extends RecyclerView.Adapter<SearchLawyerAdapte
 
         TextView court_tv, lawyer_tv, email_tv, phone_tv;
         RelativeLayout card_relative_layout;
+        ImageView send_iv;
 
         public SearchLawyerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +72,7 @@ public class SearchLawyerAdapter extends RecyclerView.Adapter<SearchLawyerAdapte
             lawyer_tv = itemView.findViewById(R.id.lawyer_tv);
             email_tv = itemView.findViewById(R.id.email_tv);
             phone_tv = itemView.findViewById(R.id.phone_tv);
+            send_iv = itemView.findViewById(R.id.send_iv);
         }
     }
 }

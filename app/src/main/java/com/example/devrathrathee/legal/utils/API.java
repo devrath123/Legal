@@ -17,4 +17,5 @@ public interface API {
     String MATTER_SENT = "matter_sent.php";
     String CASE_PAYMENT = "cases_payment.php";
     String CASE_TRANSFER = "case_transfer.php";
+    String POST_JOBS = "post_jobs.php";
 }

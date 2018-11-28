@@ -49,7 +49,12 @@
         <activity android:name=".views.ProfessionFeeDetailActivity" />
         <activity android:name=".views.AddPaymentActivity" />
         <activity android:name=".views.JobsListActivity" />
-        <activity android:name=".views.SearchLawyerActivity"></activity>
+        <activity android:name=".views.SearchLawyerActivity" />
+        <activity
+            android:name=".views.AddJobActivity"
+            android:label="@string/title_activity_add_job"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".views.CalendarActivity"></activity>
     </application>
 
 </manifest>

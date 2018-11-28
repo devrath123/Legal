@@ -33,28 +33,63 @@
         <activity
             android:name=".views.HomeActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".views.CaseDetailsActivity" />
-        <activity android:name=".views.AllCasesActivity" />
-        <activity android:name=".views.MatterReceivedActivity" />
-        <activity android:name=".views.MatterSentActivity" />
-        <activity android:name=".views.PasswordResetActivity" />
-        <activity android:name=".views.CounselDeskActivity" />
-        <activity android:name=".views.CounselDetailsActivity" />
-        <activity android:name=".views.LegalQueriesActivity" />
-        <activity android:name=".views.QueryDetailsActivity" />
-        <activity android:name=".views.AccountDetailsActivity" />
-        <activity android:name=".views.AddCaseActivity" />
-        <activity android:name=".views.MatterDetailsActivity" />
-        <activity android:name=".views.ProfessionalFeeActivity" />
-        <activity android:name=".views.ProfessionFeeDetailActivity" />
-        <activity android:name=".views.AddPaymentActivity" />
-        <activity android:name=".views.JobsListActivity" />
-        <activity android:name=".views.SearchLawyerActivity" />
+        <activity
+            android:name=".views.CaseDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.AllCasesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.MatterReceivedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.MatterSentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.PasswordResetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.CounselDeskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.CounselDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.LegalQueriesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.QueryDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.AccountDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.AddCaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.MatterDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.ProfessionalFeeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.ProfessionFeeDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.AddPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.JobsListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.SearchLawyerActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.AddJobActivity"
-            android:label="@string/title_activity_add_job"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".views.CalendarActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.CalendarActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

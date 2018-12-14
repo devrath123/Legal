@@ -82,7 +82,7 @@ public class AddCaseActivity extends AppCompatActivity {
 
     String[] categoryArray = new String[]{"Civil", "Criminal"};
     String[] stageArray = new String[]{"Admission", "Service", "Not-Heard", "Hearing", "Evidence", "Part-Heard", "Cross", "Arguments", "Reply", "Dismissal", "Bail",
-            "Anticipatory-Bail", "Interim", "Add-Interim", "Defence-Witness", "Prosecution-Witness"};
+            "Anticipatory-Bail", "Interim", "Add-Interim", "Defence-Witness", "Prosecution-Witness", "Withdrawn"};
 
     String selectedCategory, selectedStage;
     ProgressDialog progressDialog;

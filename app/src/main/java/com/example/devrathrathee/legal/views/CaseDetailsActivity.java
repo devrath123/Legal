@@ -183,5 +183,11 @@ public class CaseDetailsActivity extends AppCompatActivity {
         client_phone_tv.setText(caseBean.getClient_phone());
         category_tv.setText(caseBean.getCategory());
         court_number_tv.setText(caseBean.getCase_number());
+        if (caseBean.getStage().equals("Evidence") || caseBean.equals("Part-Heard") || caseBean.getStage().equals("Cross") ||
+                caseBean.getStage().equals("Arguments") || caseBean.getStage().equals("Dismissal") || caseBean.getStage().equals("Withdrawn")) {
+            stage_tv.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else {
+            stage_tv.setTextColor(getResources().getColor(R.color.black));
+        }
     }
 }

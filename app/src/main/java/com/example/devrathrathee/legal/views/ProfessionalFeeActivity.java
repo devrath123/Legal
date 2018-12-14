@@ -32,7 +32,7 @@ import java.util.Map;
 public class ProfessionalFeeActivity extends AppCompatActivity {
 
     RecyclerView professionalFeeRV;
-    ProgressDialog progressDialog;
+   // ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,8 @@ public class ProfessionalFeeActivity extends AppCompatActivity {
             }
         });
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+     //   progressDialog = new ProgressDialog(this);
+     //   progressDialog.setMessage("Loading...");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -88,13 +88,13 @@ public class ProfessionalFeeActivity extends AppCompatActivity {
         profFeeMap.put("user_type", SharedPreferenceManager.getInstance(ProfessionalFeeActivity.this).getString(Constants.USER_TYPE));
         profFeeMap.put("lawyer_id", SharedPreferenceManager.getInstance(ProfessionalFeeActivity.this).getString(Constants.USER_ID));
 
-        progressDialog.show();
+      //  progressDialog.show();
         GSONRequest<ProfessionalFeeBean> profFeeGSONRequest = new GSONRequest<ProfessionalFeeBean>(Request.Method.POST, API.BASE_URL + API.CASE_PAYMENT, ProfessionalFeeBean.class, profFeeMap,
 
                 new Response.Listener<ProfessionalFeeBean>() {
                     @Override
                     public void onResponse(ProfessionalFeeBean response) {
-                        progressDialog.dismiss();
+                      //  progressDialog.dismiss();
                         if (response.getClient_payment_detail() != null) {
                             setAdapter(response.getClient_payment_detail());
                         }
@@ -102,7 +102,7 @@ public class ProfessionalFeeActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+             //   progressDialog.dismiss();
             }
         });
 

@@ -120,6 +120,43 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.delete_payment_details_iv)
+    public void deletePayment(View view) {
+        if (Connectivity.isConnected(ProfessionFeeDetailActivity.this)) {
+            deletePayment();
+        } else {
+            Utilities.internetConnectionError(ProfessionFeeDetailActivity.this);
+        }
+    }
+
+    public void deletePayment() {
+        Map<String, String> profFeeMap = new HashMap<>();
+        profFeeMap.put("action", "delete");
+        profFeeMap.put("user_type", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_TYPE));
+        profFeeMap.put("lawyer_id", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_ID));
+        profFeeMap.put("case_id", getPaymentDetails().getCase_id());
+
+        progressDialog.show();
+        GSONRequest<RegistrationBean> profFeeGSONRequest = new GSONRequest<RegistrationBean>(Request.Method.POST, API.BASE_URL + API.CASE_PAYMENT, RegistrationBean.class, profFeeMap,
+
+                new Response.Listener<RegistrationBean>() {
+                    @Override
+                    public void onResponse(RegistrationBean response) {
+                        progressDialog.dismiss();
+                        Utilities.showToast(ProfessionFeeDetailActivity.this, response.getMessage());
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+            }
+        });
+
+        profFeeGSONRequest.setShouldCache(false);
+        Utilities.getRequestQueue(this).add(profFeeGSONRequest);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -154,7 +191,7 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
                         getPaymentDetails().setPaymt_status(status);
                         if (status.equals("Pending")) {
                             payment_status_tv.setText("Paid");
-                        }else{
+                        } else {
                             payment_status_tv.setText("Pending");
                         }
                     }

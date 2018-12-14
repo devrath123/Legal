@@ -45,6 +45,12 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.TodayCasesVi
 
         CaseBean.CasesToday casesTodayBean = casesTodayBeanList.get(i);
         todayCasesViewHolder.next_date_tv.setText(casesTodayBean.getDisplay_next_date());
+        if (casesTodayBean.getStage().equals("Evidence") || casesTodayBean.equals("Part-Heard") || casesTodayBean.getStage().equals("Cross") ||
+                casesTodayBean.getStage().equals("Arguments") || casesTodayBean.getStage().equals("Dismissal") || casesTodayBean.getStage().equals("Withdrawn")) {
+            todayCasesViewHolder.stage_tv.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        }else{
+            todayCasesViewHolder.stage_tv.setTextColor(context.getResources().getColor(R.color.black));
+        }
         todayCasesViewHolder.stage_tv.setText(casesTodayBean.getStage());
         todayCasesViewHolder.court_name_tv.setText(casesTodayBean.getCourt_name());
         todayCasesViewHolder.parties_name_tv.setText(casesTodayBean.getParty_a() + " vs " + casesTodayBean.getParty_b());
@@ -70,7 +76,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.TodayCasesVi
     public static class TodayCasesViewHolder extends RecyclerView.ViewHolder {
 
         RelativeLayout cardRelativeLayout;
-        RobotoLightTextView court_name_tv,case_number_tv,parties_name_tv,next_date_tv, stage_tv;
+        RobotoLightTextView court_name_tv, case_number_tv, parties_name_tv, next_date_tv, stage_tv;
 
         public TodayCasesViewHolder(@NonNull View itemView) {
             super(itemView);

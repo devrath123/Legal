@@ -90,6 +90,7 @@
         <activity
             android:name=".views.CalendarActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".views.CaseHistoryActivity"></activity>
     </application>
 
 </manifest>

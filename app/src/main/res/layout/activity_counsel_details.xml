@@ -52,7 +52,7 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:text="Counselor"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
@@ -61,7 +61,7 @@
                         android:id="@+id/counselor_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -76,7 +76,7 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:text="Court"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
@@ -85,7 +85,7 @@
                         android:id="@+id/court_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -99,7 +99,7 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:text="Judge"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
@@ -108,7 +108,7 @@
                         android:id="@+id/judge_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -123,7 +123,7 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:text="Parties"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
@@ -132,7 +132,7 @@
                         android:id="@+id/parties_name_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -146,8 +146,8 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Hearing Date"
+                        android:layout_weight="4"
+                        android:text="Court Hearing \nDate"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -155,7 +155,7 @@
                         android:id="@+id/hearing_date_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -169,7 +169,7 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:text="Status"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
@@ -178,7 +178,7 @@
                         android:id="@+id/status_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -192,8 +192,8 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Conference date"
+                        android:layout_weight="4"
+                        android:text="Conference \nDate"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -201,7 +201,7 @@
                         android:id="@+id/conference_date_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -215,8 +215,8 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Conference Time"
+                        android:layout_weight="4"
+                        android:text="Conference \nTime"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -224,7 +224,7 @@
                         android:id="@+id/conference_time_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -238,8 +238,8 @@
                     <com.example.devrathrathee.legal.utils.RobotoBoldTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Conference Place"
+                        android:layout_weight="4"
+                        android:text="Conference \nPlace"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 
@@ -247,7 +247,7 @@
                         android:id="@+id/conference_place_tv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/dimen_15sp" />
 

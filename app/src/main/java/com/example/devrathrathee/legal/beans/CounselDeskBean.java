@@ -19,19 +19,19 @@ public class CounselDeskBean {
 
     public static class CounselBean implements Parcelable{
 
-        String  counsel_name,judge_name,court_name,hearing_date,Parties,conference_place,conference_date,
-                conference_time, conference_status;
+        String  counsel_name,judge_name,court_name,court_hearing_date,Parties,conference_place,conference_date,
+                conference_time, status;
 
         protected CounselBean(Parcel in) {
             counsel_name = in.readString();
             judge_name = in.readString();
             court_name = in.readString();
-            hearing_date = in.readString();
+            court_hearing_date = in.readString();
             Parties = in.readString();
             conference_place = in.readString();
             conference_date = in.readString();
             conference_time = in.readString();
-            conference_status = in.readString();
+            status = in.readString();
         }
 
         public static final Creator<CounselBean> CREATOR = new Creator<CounselBean>() {
@@ -71,11 +71,11 @@ public class CounselDeskBean {
         }
 
         public String getHearing_date() {
-            return hearing_date;
+            return court_hearing_date;
         }
 
         public void setHearing_date(String hearing_date) {
-            this.hearing_date = hearing_date;
+            this.court_hearing_date = hearing_date;
         }
 
         public String getParties() {
@@ -111,11 +111,11 @@ public class CounselDeskBean {
         }
 
         public String getConference_status() {
-            return conference_status;
+            return status;
         }
 
         public void setConference_status(String conference_status) {
-            this.conference_status = conference_status;
+            this.status = conference_status;
         }
 
         @Override
@@ -128,12 +128,12 @@ public class CounselDeskBean {
             parcel.writeString(counsel_name);
             parcel.writeString(judge_name);
             parcel.writeString(court_name);
-            parcel.writeString(hearing_date);
+            parcel.writeString(court_hearing_date);
             parcel.writeString(Parties);
             parcel.writeString(conference_place);
             parcel.writeString(conference_date);
             parcel.writeString(conference_time);
-            parcel.writeString(conference_status);
+            parcel.writeString(status);
         }
     }
 }

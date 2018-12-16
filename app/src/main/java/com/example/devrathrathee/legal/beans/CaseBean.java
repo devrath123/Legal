@@ -46,11 +46,12 @@ public class CaseBean {
 
     public static class CasesToday implements Parcelable{
         String case_id,display_prev_date,display_next_date,court_name,court_number,case_number,judge_name,party_a,party_b,
-                stage,client_name,category,firm_name,client_phone;
-        List<PrevCaseDate> prev_case_date;
-        List<NextId> nextdt_id;
-        List<NextUpdateDate> next_update_date;
+                stage,client_name,category,firm_name,client_phone,name;
+        List<PrevCaseDate> pre_date;
+        List<NextLawyerName> next_lawyer_name;
+        List<NextUpdateDate> next_date;
         List<NextStage> next_stage;
+        List<NextJudgeName> next_judge_name;
 
         protected CasesToday(Parcel in) {
             case_id = in.readString();
@@ -67,10 +68,12 @@ public class CaseBean {
             category = in.readString();
             firm_name = in.readString();
             client_phone = in.readString();
-            prev_case_date = in.createTypedArrayList(PrevCaseDate.CREATOR);
-            nextdt_id = in.createTypedArrayList(NextId.CREATOR);
-            next_update_date = in.createTypedArrayList(NextUpdateDate.CREATOR);
+            name = in.readString();
+            pre_date = in.createTypedArrayList(PrevCaseDate.CREATOR);
+            next_lawyer_name = in.createTypedArrayList(NextLawyerName.CREATOR);
+            next_date = in.createTypedArrayList(NextUpdateDate.CREATOR);
             next_stage = in.createTypedArrayList(NextStage.CREATOR);
+            next_judge_name = in.createTypedArrayList(NextJudgeName.CREATOR);
         }
 
         @Override
@@ -89,10 +92,52 @@ public class CaseBean {
             dest.writeString(category);
             dest.writeString(firm_name);
             dest.writeString(client_phone);
-            dest.writeTypedList(prev_case_date);
-            dest.writeTypedList(nextdt_id);
-            dest.writeTypedList(next_update_date);
+            dest.writeString(name);
+            dest.writeTypedList(pre_date);
+            dest.writeTypedList(next_lawyer_name);
+            dest.writeTypedList(next_date);
             dest.writeTypedList(next_stage);
+            dest.writeTypedList(next_judge_name);
+        }
+
+        public List<PrevCaseDate> getPre_date() {
+            return pre_date;
+        }
+
+        public void setPre_date(List<PrevCaseDate> pre_date) {
+            this.pre_date = pre_date;
+        }
+
+        public List<NextLawyerName> getNext_lawyer_name() {
+            return next_lawyer_name;
+        }
+
+        public void setNext_lawyer_name(List<NextLawyerName> next_lawyer_name) {
+            this.next_lawyer_name = next_lawyer_name;
+        }
+
+        public List<NextUpdateDate> getNext_date() {
+            return next_date;
+        }
+
+        public void setNext_date(List<NextUpdateDate> next_date) {
+            this.next_date = next_date;
+        }
+
+        public List<NextJudgeName> getNext_judge_name() {
+            return next_judge_name;
+        }
+
+        public void setNext_judge_name(List<NextJudgeName> next_judge_name) {
+            this.next_judge_name = next_judge_name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         @Override
@@ -225,27 +270,27 @@ public class CaseBean {
         }
 
         public List<PrevCaseDate> getPrev_case_date() {
-            return prev_case_date;
+            return pre_date;
         }
 
         public void setPrev_case_date(List<PrevCaseDate> prev_case_date) {
-            this.prev_case_date = prev_case_date;
+            this.pre_date = prev_case_date;
         }
 
-        public List<NextId> getNextdt_id() {
-            return nextdt_id;
+        public List<NextLawyerName> getNextdt_id() {
+            return next_lawyer_name;
         }
 
-        public void setNextdt_id(List<NextId> nextdt_id) {
-            this.nextdt_id = nextdt_id;
+        public void setNextdt_id(List<NextLawyerName> nextdt_id) {
+            this.next_lawyer_name = nextdt_id;
         }
 
         public List<NextUpdateDate> getNext_update_date() {
-            return next_update_date;
+            return next_date;
         }
 
         public void setNext_update_date(List<NextUpdateDate> next_update_date) {
-            this.next_update_date = next_update_date;
+            this.next_date = next_update_date;
         }
 
         public List<NextStage> getNext_stage() {
@@ -257,10 +302,10 @@ public class CaseBean {
         }
 
         public static class PrevCaseDate implements Parcelable{
-            String prev_date;
+            String date;
 
             protected PrevCaseDate(Parcel in) {
-                prev_date = in.readString();
+                date = in.readString();
             }
 
             public static final Creator<PrevCaseDate> CREATOR = new Creator<PrevCaseDate>() {
@@ -276,11 +321,11 @@ public class CaseBean {
             };
 
             public String getPrev_date() {
-                return prev_date;
+                return date;
             }
 
             public void setPrev_date(String prev_date) {
-                this.prev_date = prev_date;
+                this.date = prev_date;
             }
 
             @Override
@@ -290,35 +335,35 @@ public class CaseBean {
 
             @Override
             public void writeToParcel(Parcel parcel, int i) {
-                parcel.writeString(prev_date);
+                parcel.writeString(date);
             }
         }
 
-        public static class NextId implements Parcelable{
-            String next_id;
+        public static class NextLawyerName implements Parcelable{
+            String name;
 
-            protected NextId(Parcel in) {
-                next_id = in.readString();
+            protected NextLawyerName(Parcel in) {
+                name = in.readString();
             }
 
-            public static final Creator<NextId> CREATOR = new Creator<NextId>() {
+            public static final Creator<NextLawyerName> CREATOR = new Creator<NextLawyerName>() {
                 @Override
-                public NextId createFromParcel(Parcel in) {
-                    return new NextId(in);
+                public NextLawyerName createFromParcel(Parcel in) {
+                    return new NextLawyerName(in);
                 }
 
                 @Override
-                public NextId[] newArray(int size) {
-                    return new NextId[size];
+                public NextLawyerName[] newArray(int size) {
+                    return new NextLawyerName[size];
                 }
             };
 
             public String getNext_id() {
-                return next_id;
+                return name;
             }
 
             public void setNext_id(String next_id) {
-                this.next_id = next_id;
+                this.name = next_id;
             }
 
             @Override
@@ -328,15 +373,53 @@ public class CaseBean {
 
             @Override
             public void writeToParcel(Parcel parcel, int i) {
-                parcel.writeString(next_id);
+                parcel.writeString(name);
+            }
+        }
+
+        public static class NextJudgeName implements Parcelable{
+            String name;
+
+            protected NextJudgeName(Parcel in) {
+                name = in.readString();
+            }
+
+            public static final Creator<NextJudgeName> CREATOR = new Creator<NextJudgeName>() {
+                @Override
+                public NextJudgeName createFromParcel(Parcel in) {
+                    return new NextJudgeName(in);
+                }
+
+                @Override
+                public NextJudgeName[] newArray(int size) {
+                    return new NextJudgeName[size];
+                }
+            };
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel parcel, int i) {
+                parcel.writeString(name);
             }
         }
 
         public static class NextUpdateDate implements Parcelable{
-            String next_date;
+            String date;
 
             protected NextUpdateDate(Parcel in) {
-                next_date = in.readString();
+                date = in.readString();
             }
 
             public static final Creator<NextUpdateDate> CREATOR = new Creator<NextUpdateDate>() {
@@ -352,11 +435,11 @@ public class CaseBean {
             };
 
             public String getNext_date() {
-                return next_date;
+                return date;
             }
 
             public void setNext_date(String next_date) {
-                this.next_date = next_date;
+                this.date = next_date;
             }
 
             @Override
@@ -366,15 +449,15 @@ public class CaseBean {
 
             @Override
             public void writeToParcel(Parcel parcel, int i) {
-                parcel.writeString(next_date);
+                parcel.writeString(date);
             }
         }
 
         public static class NextStage implements Parcelable{
-            String stages;
+            String stage;
 
             protected NextStage(Parcel in) {
-                stages = in.readString();
+                stage = in.readString();
             }
 
             public static final Creator<NextStage> CREATOR = new Creator<NextStage>() {
@@ -390,11 +473,11 @@ public class CaseBean {
             };
 
             public String getStages() {
-                return stages;
+                return stage;
             }
 
             public void setStages(String stages) {
-                this.stages = stages;
+                this.stage = stages;
             }
 
             @Override
@@ -404,7 +487,7 @@ public class CaseBean {
 
             @Override
             public void writeToParcel(Parcel parcel, int i) {
-                parcel.writeString(stages);
+                parcel.writeString(stage);
             }
         }
 

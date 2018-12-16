@@ -213,13 +213,11 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
         profFeeMap.put("user_type", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_TYPE));
         profFeeMap.put("lawyer_id", SharedPreferenceManager.getInstance(ProfessionFeeDetailActivity.this).getString(Constants.USER_ID));
 
-        progressDialog.show();
         GSONRequest<PaymentStatusBean> profFeeGSONRequest = new GSONRequest<PaymentStatusBean>(Request.Method.POST, API.BASE_URL + API.CASE_PAYMENT, PaymentStatusBean.class, profFeeMap,
 
                 new Response.Listener<PaymentStatusBean>() {
                     @Override
                     public void onResponse(PaymentStatusBean response) {
-                        progressDialog.dismiss();
                         if (response.getClient_status() != null && response.getClient_status().size() > 0) {
 
                             paymentStatusList.clear();
@@ -236,7 +234,6 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
             }
         });
 

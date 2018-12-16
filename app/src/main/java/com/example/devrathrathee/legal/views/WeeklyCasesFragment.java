@@ -32,7 +32,6 @@ import java.util.Map;
 public class WeeklyCasesFragment extends Fragment {
 
     RecyclerView recyclerView;
-    ProgressDialog progressDialog;
 
     public WeeklyCasesFragment() {
     }
@@ -59,9 +58,6 @@ public class WeeklyCasesFragment extends Fragment {
             }
         });
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading...");
-
         return view;
     }
 
@@ -81,13 +77,10 @@ public class WeeklyCasesFragment extends Fragment {
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(getActivity()).getString(Constants.USER_ID));
 
-        progressDialog.show();
-
         GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_WEEKLY, CaseBean.class, todayCasesMap,
                 new Response.Listener<CaseBean>() {
                     @Override
                     public void onResponse(CaseBean response) {
-                        progressDialog.dismiss();
                         if (response.getCases_weekly() != null) {
                             setAdapter(response.getCases_weekly());
                         }else{
@@ -97,7 +90,6 @@ public class WeeklyCasesFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
             }
         });
 

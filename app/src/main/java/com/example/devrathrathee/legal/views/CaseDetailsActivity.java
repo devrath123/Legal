@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +66,11 @@ public class CaseDetailsActivity extends AppCompatActivity {
     @BindView(R.id.category_tv)
     TextView category_tv;
 
-    ProgressDialog progressDialog;
+    @BindView(R.id.lawyer_ll)
+    LinearLayout lawyer_ll;
+
+    @BindView(R.id.lawyer_tv)
+    TextView lawyer_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +78,6 @@ public class CaseDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_case_details);
 
         ButterKnife.bind(this);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -123,7 +125,6 @@ public class CaseDetailsActivity extends AppCompatActivity {
     public void deleteCaseDetailsClick(View view) {
 
         if (Connectivity.isConnected(CaseDetailsActivity.this)) {
-            progressDialog.show();
             String url;
 
             url = API.BASE_URL + API.CASES_ALL + "?action=delete&case_id=" + getCaseBean().getCase_id() + "&user_type=" + SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_TYPE) +
@@ -134,14 +135,12 @@ public class CaseDetailsActivity extends AppCompatActivity {
                     new Response.Listener<RegistrationBean>() {
                         @Override
                         public void onResponse(RegistrationBean response) {
-                            progressDialog.dismiss();
                             Utilities.showToast(CaseDetailsActivity.this, "Case deleted");
                             finish();
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
                     Utilities.serverError(CaseDetailsActivity.this);
                 }
             });
@@ -172,17 +171,36 @@ public class CaseDetailsActivity extends AppCompatActivity {
         return null;
     }
 
-    private void setCase(CaseBean.CasesToday caseBean) {
+    private void setCase(final CaseBean.CasesToday caseBean) {
+
+        if (SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_TYPE).equals("firm")) {
+            lawyer_ll.setVisibility(View.VISIBLE);
+            lawyer_tv.setText(caseBean.getName());
+        }
+
         court_tv.setText(caseBean.getCourt_name());
         judge_tv.setText(caseBean.getJudge_name());
         case_number_tv.setText(caseBean.getCase_number());
+        case_number_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (caseBean.getNext_judge_name() != null && caseBean.getNext_judge_name().size() > 0) {
+                    Intent intent = new Intent(CaseDetailsActivity.this, CaseHistoryActivity.class);
+                    intent.putExtra(Constants.INTENT_CASE_TODAY, caseBean);
+                    startActivity(intent);
+                }
+
+            }
+        });
         parties_name_tv.setText(caseBean.getParty_a() + " vs " + caseBean.getParty_b());
         next_date_tv.setText(caseBean.getDisplay_next_date());
+        prev_date_tv.setText(caseBean.getDisplay_prev_date());
         stage_tv.setText(caseBean.getStage());
         client_tv.setText(caseBean.getClient_name());
         client_phone_tv.setText(caseBean.getClient_phone());
         category_tv.setText(caseBean.getCategory());
-        court_number_tv.setText(caseBean.getCase_number());
+        court_number_tv.setText(caseBean.getCourt_number());
         if (caseBean.getStage().equals("Evidence") || caseBean.equals("Part-Heard") || caseBean.getStage().equals("Cross") ||
                 caseBean.getStage().equals("Arguments") || caseBean.getStage().equals("Dismissal") || caseBean.getStage().equals("Withdrawn")) {
             stage_tv.setTextColor(getResources().getColor(R.color.colorAccent));

@@ -11,6 +11,7 @@ public interface Constants {
     String TYPE_LAWYER = "lawyer";
     String TYPE_FIRM = "firm";
 
+    String INTENT_CASE_TODAY = "TodayCase";
     String INTENT_CASE = "Case";
     String INTENT_CASE_ID = "CaseId";
     String INTENT_COUNSEL = "Counsel";
@@ -27,4 +28,5 @@ public interface Constants {
     String INTENT_MATTER_TYPE = "MatterType";
     String INTENT_MATTER_RECEIVED = "MatterReceived";
     String INTENT_MATTER_SENT = "MatterSent";
+
 }

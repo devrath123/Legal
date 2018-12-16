@@ -35,7 +35,6 @@ public class AllCasesActivity extends AppCompatActivity {
 
     RecyclerView allCasesRV;
     FloatingActionButton fab;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +53,6 @@ public class AllCasesActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -86,13 +82,12 @@ public class AllCasesActivity extends AppCompatActivity {
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_TYPE));
         todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(AllCasesActivity.this).getString(Constants.USER_ID));
 
-         progressDialog.show();
         GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.CASES_ALL, CaseBean.class, todayCasesMap,
 
                 new Response.Listener<CaseBean>() {
                     @Override
                     public void onResponse(CaseBean response) {
-                           progressDialog.dismiss();
+
                         if (response.getCase_all() != null) {
                             setAdapter(response.getCase_all());
                         }else{
@@ -102,7 +97,6 @@ public class AllCasesActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                  progressDialog.dismiss();
             }
         });
 

@@ -133,7 +133,6 @@ public class CheckInDialogView {
         setGridCellAdapterToDate(month, year);
     }
 
-
     private void getNextMonth() {
         if (month > 11) {
             month = 1;
@@ -170,6 +169,13 @@ public class CheckInDialogView {
         calendarView.setAdapter(adapter);
     }
 
+    public String getMonth(){
+        return month + "";
+    }
+
+    public String getYear(){
+        return year + "";
+    }
 
     private List<String> list = new ArrayList<>();
     private final String[] weekdays = new String[]{"Sun", "Mon", "Tue",

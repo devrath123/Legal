@@ -32,7 +32,6 @@ import java.util.Map;
 public class ProfessionalFeeActivity extends AppCompatActivity {
 
     RecyclerView professionalFeeRV;
-   // ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +50,6 @@ public class ProfessionalFeeActivity extends AppCompatActivity {
                 startActivity(new Intent(ProfessionalFeeActivity.this, AddPaymentActivity.class));
             }
         });
-
-     //   progressDialog = new ProgressDialog(this);
-     //   progressDialog.setMessage("Loading...");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

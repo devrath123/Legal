@@ -21,6 +21,7 @@ public class ProfessionalFeeBean {
 
     public static class PaymentDetail implements Parcelable {
         String case_id, case_number, client_name, court_name, category, client_phone, paymt_status;
+        int payment_total;
         List<PaymentId> payment_id = Collections.emptyList();
         List<PaymentDate> payment_date = Collections.emptyList();
         List<PaymentMode> payment_mode = Collections.emptyList();
@@ -36,6 +37,7 @@ public class ProfessionalFeeBean {
             category = in.readString();
             client_phone = in.readString();
             paymt_status = in.readString();
+            payment_total = in.readInt();
             payment_id = in.createTypedArrayList(PaymentId.CREATOR);
             payment_date = in.createTypedArrayList(PaymentDate.CREATOR);
             payment_mode = in.createTypedArrayList(PaymentMode.CREATOR);
@@ -70,6 +72,7 @@ public class ProfessionalFeeBean {
             dest.writeString(category);
             dest.writeString(client_phone);
             dest.writeString(paymt_status);
+            dest.writeInt(payment_total);
             dest.writeTypedList(payment_id);
             dest.writeTypedList(payment_date);
             dest.writeTypedList(payment_mode);
@@ -78,6 +81,13 @@ public class ProfessionalFeeBean {
             dest.writeTypedList(payment_remarks);
         }
 
+        public int getPayment_total() {
+            return payment_total;
+        }
+
+        public void setPayment_total(int payment_total) {
+            this.payment_total = payment_total;
+        }
 
         public static class PaymentId implements Parcelable{
              String id;

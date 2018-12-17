@@ -18,4 +18,5 @@ public interface API {
     String CASE_PAYMENT = "cases_payment.php";
     String CASE_TRANSFER = "case_transfer.php";
     String POST_JOBS = "post_jobs.php";
+    String LAWYER_CALENDAR = "calendar_lawyer.php";
 }

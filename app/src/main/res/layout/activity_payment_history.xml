@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.CalendarActivity">
+    tools:context=".views.AllCasesActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,30 +15,28 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:titleTextColor="@android:color/white" />
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/white_background"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/calenderRelativeLayout"
+        <TextView
+            android:id="@+id/total_payment_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_margin="10dp"/>
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_margin="10dp"
-            android:id="@+id/cases_calendar_rv"
+            android:id="@+id/payment_history_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp" />
 
     </LinearLayout>
 
 </LinearLayout>
-
-
-
-

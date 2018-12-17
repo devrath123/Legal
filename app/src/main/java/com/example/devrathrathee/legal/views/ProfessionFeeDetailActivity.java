@@ -105,6 +105,16 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
 
     private void setPaymentDetails(ProfessionalFeeBean.PaymentDetail paymentDetails) {
         case_number_tv.setText(paymentDetails.getCase_number());
+        case_number_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getPaymentDetails().getPayment_date() != null && getPaymentDetails().getPayment_date().size() > 0) {
+                    Intent intent = new Intent(ProfessionFeeDetailActivity.this, PaymentHistoryActivity.class);
+                    intent.putExtra(Constants.INTENT_PAYMENT_DETAIL, getPaymentDetails());
+                    startActivity(intent);
+                }
+            }
+        });
         court_tv.setText(paymentDetails.getCourt_name());
         category_tv.setText(paymentDetails.getCategory());
         client_tv.setText(paymentDetails.getClient_name());

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.devrathrathee.legal.R;
+import com.example.devrathrathee.legal.views.CalendarActivity;
 
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -167,6 +168,8 @@ public class CheckInDialogView {
         currentMonth.setText(monthsNameArrayList.get(month - 1) + " " + new SimpleDateFormat("yyyy").format(calendar.getTime()));
         adapter.notifyDataSetChanged();
         calendarView.setAdapter(adapter);
+
+        ((CalendarActivity)context).getTodayCases();
     }
 
     public String getMonth(){

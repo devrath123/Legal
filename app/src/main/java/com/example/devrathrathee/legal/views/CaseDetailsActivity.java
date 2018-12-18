@@ -72,6 +72,12 @@ public class CaseDetailsActivity extends AppCompatActivity {
     @BindView(R.id.lawyer_tv)
     TextView lawyer_tv;
 
+    @BindView(R.id.next_date_ll)
+    LinearLayout next_date_ll;
+
+    @BindView(R.id.prev_date_ll)
+    LinearLayout prev_date_ll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +118,10 @@ public class CaseDetailsActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Counseller", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Intent intent = new Intent(CaseDetailsActivity.this, SearchCounsellerActivity.class);
+                        intent.putExtra(Constants.INTENT_CASE_ID, getCaseBean().getCase_id());
+                        intent.putExtra("NextDate", getCaseBean().getDisplay_next_date());
+                        CaseDetailsActivity.this.startActivity(intent);
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -171,6 +180,14 @@ public class CaseDetailsActivity extends AppCompatActivity {
         return null;
     }
 
+    private String getType(){
+        if (getIntent() != null && getIntent().getStringExtra(Constants.CASE_TYPE) != null) {
+            return getIntent().getStringExtra(Constants.CASE_TYPE);
+        }
+
+        return null;
+    }
+
     private void setCase(final CaseBean.CasesToday caseBean) {
 
         if (SharedPreferenceManager.getInstance(CaseDetailsActivity.this).getString(Constants.USER_TYPE).equals("firm")) {
@@ -207,5 +224,16 @@ public class CaseDetailsActivity extends AppCompatActivity {
         } else {
             stage_tv.setTextColor(getResources().getColor(R.color.black));
         }
+
+        if (getType() != null && getType().equals(Constants.TYPE_CALENDAR)){
+            findViewById(R.id.delete_case_details_iv).setVisibility(View.GONE);
+            findViewById(R.id.send_case_details_iv).setVisibility(View.GONE);
+            findViewById(R.id.edit_case_details_iv).setVisibility(View.GONE);
+            prev_date_ll.setVisibility(View.GONE);
+            next_date_ll.setVisibility(View.GONE);
+            lawyer_ll.setVisibility(View.GONE);
+            parties_name_tv.setText(caseBean.getParties());
+        }
+
     }
 }

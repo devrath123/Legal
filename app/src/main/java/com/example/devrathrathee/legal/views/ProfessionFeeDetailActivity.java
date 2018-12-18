@@ -198,11 +198,12 @@ public class ProfessionFeeDetailActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(RegistrationBean response) {
                         progressDialog.dismiss();
-                        getPaymentDetails().setPaymt_status(status);
                         if (status.equals("Pending")) {
                             payment_status_tv.setText("Paid");
+                            getPaymentDetails().setPaymt_status("Paid");
                         } else {
                             payment_status_tv.setText("Pending");
+                            getPaymentDetails().setPaymt_status("Pending");
                         }
                     }
                 }, new Response.ErrorListener() {

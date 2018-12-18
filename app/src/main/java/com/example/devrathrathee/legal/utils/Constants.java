@@ -29,4 +29,7 @@ public interface Constants {
     String INTENT_MATTER_RECEIVED = "MatterReceived";
     String INTENT_MATTER_SENT = "MatterSent";
 
+    String CASE_TYPE = "CaseType";
+    String TYPE_CALENDAR = "Calendar";
+
 }

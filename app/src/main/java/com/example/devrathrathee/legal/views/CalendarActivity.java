@@ -1,8 +1,10 @@
 package com.example.devrathrathee.legal.views;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,6 +15,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.devrathrathee.legal.R;
+import com.example.devrathrathee.legal.adapters.CalendarAdapter;
+import com.example.devrathrathee.legal.adapters.CaseHistoryAdapter;
 import com.example.devrathrathee.legal.beans.CalendarCaseBean;
 import com.example.devrathrathee.legal.beans.CaseBean;
 import com.example.devrathrathee.legal.utils.API;
@@ -25,9 +29,10 @@ import com.example.devrathrathee.legal.utils.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class CalendarActivity extends AppCompatActivity implements DateSelectListener{
+public class CalendarActivity extends AppCompatActivity implements DateSelectListener {
 
     ProgressDialog progressDialog;
     RelativeLayout calenderRelativeLayout;
@@ -73,7 +78,7 @@ public class CalendarActivity extends AppCompatActivity implements DateSelectLis
 
     }
 
-    private void getTodayCases() {
+    public void getTodayCases() {
         Map<String, String> todayCasesMap = new HashMap<>();
         todayCasesMap.put("action", "select");
         todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(this).getString(Constants.USER_TYPE));
@@ -85,7 +90,7 @@ public class CalendarActivity extends AppCompatActivity implements DateSelectLis
                 new Response.Listener<CalendarCaseBean>() {
                     @Override
                     public void onResponse(CalendarCaseBean response) {
-                        Log.i("Response : ", response.getLawyer_calender().toString());
+                        setAdapter(response.getLawyer_calender());
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -95,4 +100,39 @@ public class CalendarActivity extends AppCompatActivity implements DateSelectLis
         casesTodayBeanGSONRequest.setShouldCache(false);
         Utilities.getRequestQueue(this).add(casesTodayBeanGSONRequest);
     }
+
+    private void setAdapter(List<CalendarCaseBean.LawyerCalendar> cases_today) {
+        CalendarAdapter casesAdapter = new CalendarAdapter(CalendarActivity.this, cases_today);
+        cases_calendar_rv.setAdapter(casesAdapter);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        cases_calendar_rv.setLayoutManager(mLayoutManager);
+
+    }
+
+    public void getCaseDetails(String id) {
+        Map<String, String> todayCasesMap = new HashMap<>();
+        todayCasesMap.put("action", "view");
+        todayCasesMap.put("user_type", SharedPreferenceManager.getInstance(this).getString(Constants.USER_TYPE));
+        todayCasesMap.put("lawyer_id", SharedPreferenceManager.getInstance(this).getString(Constants.USER_ID));
+        todayCasesMap.put("id", id);
+
+        GSONRequest<CaseBean> casesTodayBeanGSONRequest = new GSONRequest<CaseBean>(Request.Method.POST, API.BASE_URL + API.LAWYER_CALENDAR, CaseBean.class, todayCasesMap,
+                new Response.Listener<CaseBean>() {
+                    @Override
+                    public void onResponse(CaseBean response) {
+                        Log.i("Response : ", response.getCases_details().toString());
+                        Intent intent = new Intent(CalendarActivity.this, CaseDetailsActivity.class);
+                        intent.putExtra(Constants.INTENT_CASE, response.getCases_details().get(0));
+                        intent.putExtra(Constants.CASE_TYPE, Constants.TYPE_CALENDAR);
+                        startActivity(intent);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        casesTodayBeanGSONRequest.setShouldCache(false);
+        Utilities.getRequestQueue(this).add(casesTodayBeanGSONRequest);
+    }
+
 }

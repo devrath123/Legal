@@ -11,6 +11,15 @@ public class CaseBean {
     List<CasesToday> cases_today;
     List<CasesToday> cases_weekly;
     List<CasesToday> case_all;
+    List<CasesToday> cases_details;
+
+    public List<CasesToday> getCases_details() {
+        return cases_details;
+    }
+
+    public void setCases_details(List<CasesToday> cases_details) {
+        this.cases_details = cases_details;
+    }
 
     public List<CasesToday> getCase_all() {
         return case_all;
@@ -45,8 +54,8 @@ public class CaseBean {
     }
 
     public static class CasesToday implements Parcelable{
-        String case_id,display_prev_date,display_next_date,court_name,court_number,case_number,judge_name,party_a,party_b,
-                stage,client_name,category,firm_name,client_phone,name;
+        String id,display_prev_date,display_next_date,court_name,court_number,case_number,judge_name,party_a,party_b,
+                stage,client_name,category,firm_name,client_phone,name,parties;
         List<PrevCaseDate> pre_date;
         List<NextLawyerName> next_lawyer_name;
         List<NextUpdateDate> next_date;
@@ -54,7 +63,7 @@ public class CaseBean {
         List<NextJudgeName> next_judge_name;
 
         protected CasesToday(Parcel in) {
-            case_id = in.readString();
+            id = in.readString();
             display_prev_date = in.readString();
             display_next_date = in.readString();
             court_name = in.readString();
@@ -69,6 +78,7 @@ public class CaseBean {
             firm_name = in.readString();
             client_phone = in.readString();
             name = in.readString();
+            parties = in.readString();
             pre_date = in.createTypedArrayList(PrevCaseDate.CREATOR);
             next_lawyer_name = in.createTypedArrayList(NextLawyerName.CREATOR);
             next_date = in.createTypedArrayList(NextUpdateDate.CREATOR);
@@ -78,7 +88,7 @@ public class CaseBean {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(case_id);
+            dest.writeString(id);
             dest.writeString(display_prev_date);
             dest.writeString(display_next_date);
             dest.writeString(court_name);
@@ -93,11 +103,20 @@ public class CaseBean {
             dest.writeString(firm_name);
             dest.writeString(client_phone);
             dest.writeString(name);
+            dest.writeString(parties);
             dest.writeTypedList(pre_date);
             dest.writeTypedList(next_lawyer_name);
             dest.writeTypedList(next_date);
             dest.writeTypedList(next_stage);
             dest.writeTypedList(next_judge_name);
+        }
+
+        public String getParties() {
+            return parties;
+        }
+
+        public void setParties(String parties) {
+            this.parties = parties;
         }
 
         public List<PrevCaseDate> getPre_date() {
@@ -158,11 +177,11 @@ public class CaseBean {
         };
 
         public String getCase_id() {
-            return case_id;
+            return id;
         }
 
         public void setCase_id(String case_id) {
-            this.case_id = case_id;
+            this.id = case_id;
         }
 
         public String getDisplay_prev_date() {

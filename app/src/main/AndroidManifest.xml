@@ -91,7 +91,8 @@
             android:name=".views.CalendarActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".views.CaseHistoryActivity" />
-        <activity android:name=".views.PaymentHistoryActivity"></activity>
+        <activity android:name=".views.PaymentHistoryActivity" />
+        <activity android:name=".views.SearchCounsellerActivity"></activity>
     </application>
 
 </manifest>

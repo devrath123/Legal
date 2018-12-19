@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -202,7 +203,13 @@ public class SearchCounsellerActivity extends AppCompatActivity {
         timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedTime = ((String) parent.getSelectedItem()).replace(" ","");
+                selectedTime = ((String) parent.getSelectedItem());
+
+                if (selectedTime.equals("11 AM")) {
+                    selectedTime = "11:00";
+                } else {
+                    selectedTime = "15:00";
+                }
             }
 
             @Override
@@ -216,7 +223,7 @@ public class SearchCounsellerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 transfer(counsel_id);
-                deleteDialog.dismiss();
+             //   deleteDialog.dismiss();
             }
         });
 
@@ -234,7 +241,7 @@ public class SearchCounsellerActivity extends AppCompatActivity {
             profFeeMap.put("lawyer_id", SharedPreferenceManager.getInstance(SearchCounsellerActivity.this).getString(Constants.USER_ID));
             profFeeMap.put("filter[counsel_id]", counsel_id);
             profFeeMap.put("filter[cc_case_id]", getCaseId());
-            profFeeMap.put("filter[cc_next_date]", getNextDate());
+            //  profFeeMap.put("filter[cc_next_date]", getNextDate());
             profFeeMap.put("type_selection", selectedType);
             profFeeMap.put("filter[cc_hearing_time]", selectedTime);
 
@@ -254,7 +261,14 @@ public class SearchCounsellerActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     progressDialog.dismiss();
                 }
-            });
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "multipart/form-data");
+                    return headers;
+                }
+            };
 
             profFeeGSONRequest.setShouldCache(false);
             Utilities.getRequestQueue(this).add(profFeeGSONRequest);

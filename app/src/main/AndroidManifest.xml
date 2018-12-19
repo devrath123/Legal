@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:usesCleartextTraffic="true">
+        >
         <activity
             android:name=".views.SplashActivity"
             android:screenOrientation="portrait">
@@ -92,7 +92,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".views.CaseHistoryActivity" />
         <activity android:name=".views.PaymentHistoryActivity" />
-        <activity android:name=".views.SearchCounsellerActivity"></activity>
+        <activity android:name=".views.SearchCounsellerActivity" />
+        <activity android:name=".views.FindInternActivity"></activity>
     </application>
 
 </manifest>

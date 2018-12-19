@@ -187,6 +187,11 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(new Intent(HomeActivity.this, JobsListActivity.class));
                 break;
 
+            case R.id.nav_find_interns:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(HomeActivity.this, FindInternActivity.class));
+                break;
+
             case R.id.nav_legal_queries:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(HomeActivity.this, LegalQueriesActivity.class));

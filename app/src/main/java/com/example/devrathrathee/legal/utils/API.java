@@ -3,6 +3,7 @@ package com.example.devrathrathee.legal.utils;
 public interface API {
 
     String BASE_URL = "https://legumkart.com/api/";
+    String FILE_BASE_URL = "https://legumkart.com/img/intern_resumes/";
     String LOGIN = "login_api.php";
     String REGISTRATION = "register_api.php";
     String CASES_TODAY = "cases_today.php";

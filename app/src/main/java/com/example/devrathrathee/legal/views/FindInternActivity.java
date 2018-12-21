@@ -2,6 +2,8 @@ package com.example.devrathrathee.legal.views;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,7 +50,7 @@ public class FindInternActivity extends AppCompatActivity {
     RecyclerView counseller_rv;
     ProgressDialog progressDialog;
     List<String> practiseList = new ArrayList<>();
-    String selectedPractiseArea="";
+    String selectedPractiseArea = "";
     ArrayAdapter<String> practiseAreaArrayAdapter;
 
     @Override
@@ -191,7 +193,10 @@ public class FindInternActivity extends AppCompatActivity {
     }
 
     public void viewPdf(FindInternBean.SearchIntern findBean) {
-
+        if (!findBean.getResume().equals("")) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(API.FILE_BASE_URL + findBean.getResume()));
+            startActivity(browserIntent);
+        }
     }
 
     public void sendMail(final FindInternBean.SearchIntern findBean) {

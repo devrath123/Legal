@@ -16,7 +16,15 @@ public class FindInternBean {
 
     public static class SearchIntern{
 
-        String id,name,apply_as,address,phone,email,language,description,enrollment_number,enrollment_date;
+        String id,name,apply_as,address,phone,email,language,description,enrollment_number,enrollment_date,resume;
+
+        public String getResume() {
+            return resume;
+        }
+
+        public void setResume(String resume) {
+            this.resume = resume;
+        }
 
         public String getId() {
             return id;
